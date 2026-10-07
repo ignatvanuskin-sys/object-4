@@ -6,7 +6,9 @@ import { site } from "@/lib/site";
 const strip = [
   { label: "2ГИС", value: `${site.rating} · ${site.ratingsCount} оценок`, href: site.twoGisReviews },
   { label: "Адрес", value: `${site.city}, ${site.addressShort}`, href: site.twoGisRoute },
-  { label: "Режим", value: site.hours, href: null },
+  // Non-breaking spaces bind the time range together so that on a narrow phone
+  // the line breaks after "Ежедневно," instead of leaving a dangling dash.
+  { label: "Режим", value: site.hours.replace(" — ", "\u00a0—\u00a0"), href: null },
   { label: "Телефон", value: site.phoneLabel, href: site.phoneHref },
 ];
 
@@ -53,10 +55,13 @@ export function Hero() {
       <div className="grain absolute inset-0" aria-hidden="true" />
       <div className="vignette absolute inset-0" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-5 pt-24 sm:px-8 lg:px-12 lg:pt-32">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-5 pt-20 sm:px-8 lg:px-12 lg:pt-28">
         <div className="flex-1" />
 
-        <div className="max-w-[min(100%,60rem)] pb-10 lg:pb-16">
+        {/* Tightened so that the hero plus the info strip fit inside one
+            viewport on a 1440x900 laptop — at the old scale the strip was cut
+            to a 10px sliver at the bottom edge, which read as a broken layout. */}
+        <div className="max-w-[min(100%,60rem)] pb-8 lg:pb-10">
           <p
             className="label flex flex-wrap items-center gap-x-3 gap-y-1 text-paper/60"
             data-reveal
@@ -69,7 +74,7 @@ export function Hero() {
           </p>
 
           <h1
-            className="display mt-6 text-[clamp(2.2rem,7.4vw,6.4rem)] text-paper"
+            className="display mt-5 text-[clamp(2.1rem,6.2vw,5.5rem)] text-paper"
             data-reveal
             style={{ "--reveal-delay": "90ms" } as React.CSSProperties}
           >
@@ -79,7 +84,7 @@ export function Hero() {
           </h1>
 
           <p
-            className="measure mt-7 text-[1.0625rem] leading-relaxed text-paper/85 lg:text-[1.125rem]"
+            className="measure mt-6 text-[1.0625rem] leading-relaxed text-paper/85 lg:text-[1.125rem]"
             data-reveal
             style={{ "--reveal-delay": "170ms" } as React.CSSProperties}
           >
@@ -88,7 +93,7 @@ export function Hero() {
           </p>
 
           <div
-            className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
             data-reveal
             style={{ "--reveal-delay": "250ms" } as React.CSSProperties}
           >
