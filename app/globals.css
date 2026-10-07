@@ -42,7 +42,15 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /**
+   * No global `scroll-behavior: smooth`.
+   *
+   * It turned every fragment navigation into an animation, which means a
+   * shared /#loc-pila link glided down the whole page on load instead of
+   * jumping like a real anchor, and it made the behaviour depend on rendered
+   * frames — untestable and fragile. In-page jumps are instant now, which is
+   * the platform default and the more predictable behaviour on a one-page site.
+   */
   -webkit-text-size-adjust: 100%;
   color-scheme: dark;
 }
@@ -321,9 +329,6 @@ html {
    -------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   *,
   *::before,
   *::after {
