@@ -103,12 +103,19 @@ function LocationDetail({ loc }: { loc: Location }) {
 export function Locations() {
   const [active, setActive] = useState(0);
 
-  // Deep link: /#loc-pila selects that location on load.
+  // Deep link: /#loc-pila selects that location — on load and on every later
+  // hash change, since following a shared link inside the same document does
+  // not remount the component.
   useEffect(() => {
-    const match = window.location.hash.match(/^#loc-(.+)$/);
-    if (!match) return;
-    const index = locations.findIndex((l) => l.id === match[1]);
-    if (index >= 0) setActive(index);
+    const sync = () => {
+      const match = window.location.hash.match(/^#loc-(.+)$/);
+      if (!match) return;
+      const index = locations.findIndex((l) => l.id === match[1]);
+      if (index >= 0) setActive(index);
+    };
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
   }, []);
 
   /** The switcher is a tab control, so its state belongs in the URL. */

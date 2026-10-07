@@ -7,12 +7,20 @@ import { faq, site } from "@/lib/site";
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
-  // Deep link: /#faq-panel-3 opens that answer on load.
+  // Deep link: /#faq-panel-3 opens that answer.
+  // `hashchange` matters as much as the initial read: following a shared link
+  // while already on the page is a same-document navigation, so the component
+  // never remounts and a mount-only effect would silently ignore the new hash.
   useEffect(() => {
-    const match = window.location.hash.match(/^#faq-panel-(\d+)$/);
-    if (!match) return;
-    const index = Number(match[1]);
-    if (index >= 0 && index < faq.length) setOpen(index);
+    const sync = () => {
+      const match = window.location.hash.match(/^#faq-panel-(\d+)$/);
+      if (!match) return;
+      const index = Number(match[1]);
+      if (index >= 0 && index < faq.length) setOpen(index);
+    };
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
   }, []);
 
   /** Keeps the expanded panel in the URL so the state is shareable. */
