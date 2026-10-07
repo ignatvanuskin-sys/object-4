@@ -11,9 +11,13 @@ const fieldBase =
 
 /** The invalid state has to be visible, not just announced. */
 const fieldCls = (bad = false) =>
-  `${fieldBase} ${bad ? "border-ember" : "border-white/20 hover:border-white/40 focus:border-signal"}`;
+  `${fieldBase} ${
+    bad ? "border-ember bg-ember/5" : "border-white/20 hover:border-white/40 focus:border-signal"
+  }`;
 
-const labelCls = "label block text-paper/55";
+/** Never set two colour utilities at once — the stylesheet order would decide. */
+const labelCls = (bad = false) =>
+  `label block ${bad ? "text-ember" : "text-paper/55"}`;
 
 /**
  * Deliberately three fields. The payload is normalised, validated client-side and
@@ -134,7 +138,7 @@ export function BookingForm() {
 
       <div className="mt-6 grid gap-6">
         <div>
-          <label className={labelCls} htmlFor="bf-name">
+          <label className={labelCls(invalid === "name")} htmlFor="bf-name">
             Имя
           </label>
           <input
@@ -152,7 +156,7 @@ export function BookingForm() {
         </div>
 
         <div>
-          <label className={labelCls} htmlFor="bf-phone">
+          <label className={labelCls(invalid === "phone")} htmlFor="bf-phone">
             Телефон
           </label>
           <input
@@ -171,7 +175,7 @@ export function BookingForm() {
         </div>
 
         <div>
-          <label className={labelCls} htmlFor="bf-comment">
+          <label className={labelCls()} htmlFor="bf-comment">
             Комментарий
           </label>
           <textarea

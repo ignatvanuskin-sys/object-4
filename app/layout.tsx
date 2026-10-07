@@ -162,7 +162,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <a
           href="#main"
-          className="label fixed top-4 left-4 z-[80] -translate-y-[200%] bg-signal px-5 py-3 text-white transition-transform focus-visible:translate-y-0"
+          className="label fixed top-4 left-4 z-[80] inline-flex min-h-11 -translate-y-[200%] items-center bg-signal px-5 text-white transition-transform focus-visible:translate-y-0"
         >
           К содержимому
         </a>

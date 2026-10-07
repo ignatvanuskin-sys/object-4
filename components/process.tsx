@@ -82,9 +82,11 @@ export function Process() {
                 ref={(el) => {
                   refs.current[i] = el;
                 }}
-                className={`grid grid-cols-[auto_1fr] gap-x-5 border-t border-white/12 py-6 transition-opacity duration-700 sm:gap-x-10 sm:py-8 ${
-                  isActive ? "opacity-100" : "opacity-45"
-                }`}
+                // Dimming is done with colour, not row opacity: `opacity-45`
+                // multiplied into the child text and dropped it to ~2:1, which
+                // axe flagged on 10 nodes. Colour-only dimming keeps the
+                // hierarchy and stays above 4.5:1.
+                className="grid grid-cols-[auto_1fr] gap-x-5 border-t border-white/12 py-6 sm:gap-x-10 sm:py-8"
               >
                 <span
                   className={`num pt-1 text-[0.875rem] transition-colors duration-500 ${
@@ -98,10 +100,18 @@ export function Process() {
                     isActive ? "translate-x-0 lg:translate-x-2" : "translate-x-0"
                   }`}
                 >
-                  <h3 className="display text-[clamp(1.25rem,2.8vw,2rem)] text-paper">
+                  <h3
+                    className={`display text-[clamp(1.25rem,2.8vw,2rem)] transition-colors duration-500 ${
+                      isActive ? "text-paper" : "text-paper/70"
+                    }`}
+                  >
                     {step.title}
                   </h3>
-                  <p className="measure mt-3 text-[0.9375rem] leading-relaxed text-paper/60">
+                  <p
+                    className={`measure mt-3 text-[0.9375rem] leading-relaxed transition-colors duration-500 ${
+                      isActive ? "text-paper/85" : "text-paper/60"
+                    }`}
+                  >
                     {step.text}
                   </p>
                 </div>

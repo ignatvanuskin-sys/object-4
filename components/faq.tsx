@@ -40,7 +40,10 @@ export function Faq() {
                 data-reveal
                 style={{ "--reveal-delay": "140ms" } as React.CSSProperties}
               >
-                <a href={site.phoneHref} className="display text-[1.5rem] text-paper">
+                <a
+                  href={site.phoneHref}
+                  className="display inline-flex min-h-11 items-center text-[1.5rem] text-paper"
+                >
                   {site.phoneLabel}
                 </a>
                 <a

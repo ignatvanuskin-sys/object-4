@@ -33,7 +33,7 @@ export function Contacts() {
 
             <a
               href={site.phoneHref}
-              className="display mt-8 block text-[clamp(1.75rem,4.4vw,2.75rem)] text-paper transition-colors duration-300 hover:text-ember"
+              className="display mt-8 inline-flex min-h-11 items-center text-[clamp(1.75rem,4.4vw,2.75rem)] text-paper transition-colors duration-300 hover:text-ember"
               data-reveal
               style={{ "--reveal-delay": "60ms" } as React.CSSProperties}
             >
