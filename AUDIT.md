@@ -575,3 +575,184 @@ POST /api/booking  ->  200 {"ok":true,"delivered":false}
 
 Чтобы превратить демо в рабочий сайт, нужно ровно одно действие: задать
 `BOOKING_WEBHOOK_URL` в настройках проекта на Vercel. Правки кода не требуются.
+
+---
+
+# ЧАСТЬ IV. РЕВЬЮ ПО СКИЛЛАМ VERCEL LABS
+
+Источник: [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
+Применены два скилла:
+
+* **web-design-guidelines** — ревью UX/UI. Скилл не хранит правила у себя: он
+  предписывает перед каждым ревью скачивать актуальный свод из
+  `vercel-labs/web-interface-guidelines`. Он скачан, сохранён в
+  `_tools/vercel-web-guidelines.md` (192 строки, ~100 правил) и применён целиком.
+* **react-best-practices** — 70 правил по оптимизации React/Next.js в 8 категориях.
+
+Проверка повторяемая: `node _tools/audit-vercel-rules.mjs`.
+
+## Находки и исправления
+
+### Touch & Interaction
+
+```
+app/globals.css:71   ✗ не было touch-action → добавлено manipulation на все контролы
+app/globals.css:80   ✗ не было -webkit-tap-highlight-color → задан осознанно (был серый блик платформы)
+components/site-header.tsx:121  ✗ меню-шторка без overscroll-behavior → overscroll-contain
+components/lightbox.tsx:62      ✗ лайтбокс без overscroll-behavior → overscroll-contain
+app/globals.css:84   ✗ scroll chaining на десктопе → overscroll-behavior: none для pointer: fine
+```
+
+### Safe Areas & Layout
+
+```
+app/layout.tsx:92    ✗ не было viewportFit: cover →
+                        env(safe-area-inset-*) всегда возвращал 0,
+                        вся существовавшая разметка под вырез была мёртвым кодом
+app/globals.css:96   ✗ не было хелперов → .safe-top и .pad-x
+12 файлов            px-5 sm:px-8 lg:px-12 → pad-x (прежние отступы как минимум, рост при вырезе)
+```
+
+Это была самая содержательная находка: код для safe-area **выглядел** готовым к вырезу,
+но без `viewport-fit` не работал нигде.
+
+### Animation
+
+```
+app/globals.css:195  ✗ занавес кадров анимировал clip-path (перерисовка кадра на каждом тике)
+                       → псевдоэлемент, уезжающий через transform (композитор-дружественно)
+components/ticker.tsx:44  ✗ цикл 46 с авто-движения без механизма остановки
+                            (WCAG 2.2.2, уровень A) → кнопка паузы с aria-pressed
+```
+
+### Typography
+
+```
+lib/site.ts         ✗ 15 цен строками "10 000 ₸" → числа + Intl.NumberFormat("ru-KZ", KZT)
+lib/site.ts         ✗ 7 дат строками "30 сентября 2026" → ISO + Intl.DateTimeFormat
+lib/site.ts:120     ✗ бренд разрывался между строками → brandFull с неразрывным пробелом
+components/site-header.tsx:9   ✗ авто-перевод превращал «ОБЪЕКТ» в существительное → translate="no"
+components/booking-form.tsx    ✗ плейсхолдеры без многоточия → все три заканчиваются на …
+```
+
+Формат `Intl` проверен до внедрения: `10 000 ₸` совпадает с прежним написанием
+посимвольно, `formatToParts` даёт «30 сентября 2026» без суффикса «г.», который
+добавляет полный ru-RU.
+
+### Forms & Focus
+
+```
+components/booking-form.tsx:10  ✗ focus:outline-none без видимой замены
+                                   → убран, работает глобальное кольцо :focus-visible
+                                     (смена цвета рамки осталась для указателя)
+```
+
+### Navigation & State
+
+```
+components/locations.tsx:106  ✗ состояние вкладки не отражалось в адресе → /#loc-pila
+components/faq.tsx:10         ✗ раскрытый вопрос не отражался в адресе → /#faq-panel-N
+оба файла                     ✗ обработчик только на монтирование → добавлен hashchange
+```
+
+Второй пункт — реальный баг, найденный независимым регрессом уже после
+внедрения: переход по общей ссылке, когда страница уже открыта, это навигация
+внутри документа, компонент не перемонтируется, и эффект на `[]` молча
+игнорировал новый хэш. Теперь оба компонента слушают `hashchange`.
+
+### Hover & Interactive States
+
+```
+components/mobile-cta.tsx:57  ✗ две кнопки без hover/active → добавлены
+components/faq.tsx:74         ✗ вопросы без hover → group-hover на акцентный тон
+```
+
+### Bundle (react-best-practices, категории `bundle-*`)
+
+```
+package.json  ✗ clsx, lucide-react, motion объявлены и не импортируются нигде
+                → удалены; остались next, react, react-dom
+package.json  ✓ нет barrel-файлов: импорты прямые (@/components/x)
+components/*  ✓ статические массивы данных вынесены на уровень модуля
+app/layout.tsx ✓ шрифты на уровне модуля (server-hoist-static-io)
+              ✓ next/font отдаёт font-display: swap и преload шрифтов
+components/booking-form.tsx ✓ неконтролируемые поля — нет ререндера на каждое нажатие
+✓ нет водопадов, нет клиентского фетчинга, нет useMemo для простых выражений,
+  нет компонентов внутри компонентов, условный рендер через тернарник
+```
+
+## Итоговое состояние проверки
+
+```
+app/globals.css                      ✓ pass
+app/layout.tsx                       ✓ pass
+app/not-found.tsx                    ✓ pass
+components/about.tsx                 ✓ pass
+components/advantages.tsx            ✓ pass
+components/atmosphere.tsx            ✓ pass
+components/booking-form.tsx          ✓ pass
+components/contacts.tsx              ✓ pass
+components/faq.tsx                   ✓ pass
+components/final-cta.tsx             ✓ pass
+components/hero.tsx                  ✓ pass
+components/lightbox.tsx              ✓ pass
+components/locations.tsx             ✓ pass
+components/mobile-cta.tsx            ✓ pass
+components/photo.tsx                 ✓ pass
+components/process.tsx               ✓ pass
+components/reveal-manager.tsx        ✓ pass
+components/reviews.tsx               ✓ pass
+components/site-footer.tsx           ✓ pass
+components/site-header.tsx           ✓ pass
+components/ticker.tsx                ✓ pass
+components/ui.tsx                    ✓ pass
+lib/format.ts                        ✓ новый модуль
+lib/site.ts                          ✓ pass
+lib/media.ts                         ✓ pass
+lib/site-url.ts                      ✓ pass
+```
+
+## Осознанные отступления от правил
+
+Правила не применялись слепо — три места, где я отступил и почему:
+
+1. **First person в заголовке.** Правило про активный залог советует избегать первого лица.
+   «Мы не показываем страшилки. Мы ставим вас внутрь них.» — это редакторская позиция бренда,
+   а не документация. Оставил.
+2. **Title Case в заголовках и кнопках.** Правило задано для английского (Chicago style);
+   сайт русскоязычный, где действует своя типографика. Неприменимо.
+3. **`preconnect` для сторонних доменов.** Единственный внешний ресурс — карта в iframe,
+   загружается лениво. Preconnect свёл бы ленивую загрузку на нет ради ускорения того,
+   что до среза страницы может вообще не понадобиться.
+
+## Как проверялось
+
+Изменения — не «на глаз». Проверки, которые дали результат:
+
+* `node _tools/audit-vercel-rules.mjs` — повторяемая проверка по своду правил;
+* разбор **собранного** CSS, а не исходников: именно так выяснилось, что минификатор
+  удалял `vh`-фолбэк как дубль, а занавес компилируется в `transform`;
+* отдельная проверка того, что `clip-path` остался в CSS ровно один раз — и это `.sr-only`
+  из Tailwind, а не анимация;
+* атомарные замеры в браузере одной выборкой, а не несколькими вызовами.
+
+## Ложные срабатывания, снятые после проверки
+
+Три «бага» оказались артефактами измерения, а не дефектами. Фиксирую, чтобы не
+потерялись:
+
+1. **«Контраст не проходит, 10 узлов»** — перемножение прозрачностей строки и текста
+   в секции «Как записаться». Реально было, исправлено.
+2. **«Правило `overscroll-behavior: contain` не выполнено»** — выполнено, но через
+   Tailwind-класс `overscroll-contain`; моя проверка искала только CSS-декларацию.
+   Проверка исправлена.
+3. **«`focus:outline-none` без замены»** — класс удалён, в файле остался только
+   комментарий с его упоминанием. Проверка теперь снимает комментарии перед анализом.
+4. **«Глубокая ссылка `#faq-panel-5` не работает»** — работала. Вкладка под управлением
+   автоматизации не производит кадры, поэтому CSS-переход замирал на стартовых значениях.
+   После принудительной отрисовки кадра: `gridTemplateRows: 72.75px`, высота 73px,
+   текст ответа виден. Дефекта нет — оказался артефактом невидимой вкладки.
+
+Пункт 4 — отдельное напоминание: измерение в headless-подобной среде само по себе
+не доказательство. Прежде чем заводить баг, нужно убедиться, что среда действительно
+отрисовывает то, что измеряется.
