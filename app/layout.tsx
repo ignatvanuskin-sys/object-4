@@ -154,6 +154,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className={`${playfair.variable} ${inter.variable}`}>
       <body className="antialiased">
+        {/* Runs before anything below it is painted, so the reveal animation
+            never flashes. If it does not run, globals.css leaves every
+            [data-reveal] element in its final, visible state. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js-reveal')",
+          }}
+        />
         <a
           href="#main"
           className="label fixed top-4 left-4 z-[80] -translate-y-[200%] bg-signal px-5 py-3 text-white transition-transform focus-visible:translate-y-0"

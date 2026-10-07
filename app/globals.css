@@ -142,7 +142,10 @@ body {
    Scroll reveal — driven by IntersectionObserver in components/reveal-manager.
    -------------------------------------------------------------------------- */
 
-[data-reveal] {
+/* Progressive enhancement: the initial hidden state is only applied once a
+   tiny inline script has put `.js-reveal` on <html>. Without JavaScript the
+   content is simply visible — it can never be stranded behind a curtain. */
+.js-reveal [data-reveal] {
   opacity: 0;
   transform: translate3d(0, 22px, 0);
   transition:
@@ -152,7 +155,7 @@ body {
   will-change: opacity, transform;
 }
 
-[data-reveal="in"] {
+.js-reveal [data-reveal="in"] {
   opacity: 1;
   transform: none;
 }
@@ -161,13 +164,13 @@ body {
    IntersectionObserver watches. Only its .clip-target child carries the
    curtain. Clipping the observed element itself would collapse its
    intersection rectangle and the reveal would never fire. */
-[data-reveal-clip] .clip-target {
+.js-reveal [data-reveal-clip] .clip-target {
   clip-path: inset(0 0 100% 0);
   transition: clip-path 1.15s var(--ease-quint);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-[data-reveal-clip="in"] .clip-target {
+.js-reveal [data-reveal-clip="in"] .clip-target {
   clip-path: inset(0 0 0 0);
 }
 
@@ -237,6 +240,7 @@ body {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
+    transition: none !important;
   }
   .ticker-track {
     animation: none !important;
