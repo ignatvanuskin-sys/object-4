@@ -1,0 +1,322 @@
+{
+  "hall": {
+    "color": "#370308",
+    "wide": [
+      {
+        "file": "hall-wide-1600.webp",
+        "w": 1600,
+        "h": 1000,
+        "bytes": 52818
+      },
+      {
+        "file": "hall-wide-1100.webp",
+        "w": 1100,
+        "h": 688,
+        "bytes": 31264
+      },
+      {
+        "file": "hall-wide-700.webp",
+        "w": 700,
+        "h": 438,
+        "bytes": 16540
+      }
+    ],
+    "tall": [
+      {
+        "file": "hall-tall-1200.webp",
+        "w": 1200,
+        "h": 1600,
+        "bytes": 46662
+      },
+      {
+        "file": "hall-tall-800.webp",
+        "w": 800,
+        "h": 1067,
+        "bytes": 26618
+      },
+      {
+        "file": "hall-tall-500.webp",
+        "w": 500,
+        "h": 667,
+        "bytes": 13184
+      }
+    ]
+  },
+  "stairs": {
+    "color": "#1a1614",
+    "wide": [
+      {
+        "file": "stairs-wide-1600.webp",
+        "w": 1600,
+        "h": 1000,
+        "bytes": 19214
+      },
+      {
+        "file": "stairs-wide-1100.webp",
+        "w": 1100,
+        "h": 688,
+        "bytes": 10736
+      },
+      {
+        "file": "stairs-wide-700.webp",
+        "w": 700,
+        "h": 438,
+        "bytes": 5774
+      }
+    ],
+    "tall": [
+      {
+        "file": "stairs-tall-1200.webp",
+        "w": 1200,
+        "h": 1600,
+        "bytes": 33708
+      },
+      {
+        "file": "stairs-tall-800.webp",
+        "w": 800,
+        "h": 1067,
+        "bytes": 19436
+      },
+      {
+        "file": "stairs-tall-500.webp",
+        "w": 500,
+        "h": 667,
+        "bytes": 10122
+      }
+    ]
+  },
+  "corridor": {
+    "color": "#252320",
+    "wide": [
+      {
+        "file": "corridor-wide-1600.webp",
+        "w": 1600,
+        "h": 1000,
+        "bytes": 29002
+      },
+      {
+        "file": "corridor-wide-1100.webp",
+        "w": 1100,
+        "h": 688,
+        "bytes": 17212
+      },
+      {
+        "file": "corridor-wide-700.webp",
+        "w": 700,
+        "h": 438,
+        "bytes": 8968
+      }
+    ],
+    "tall": [
+      {
+        "file": "corridor-tall-1200.webp",
+        "w": 1200,
+        "h": 1600,
+        "bytes": 51916
+      },
+      {
+        "file": "corridor-tall-800.webp",
+        "w": 800,
+        "h": 1067,
+        "bytes": 30282
+      },
+      {
+        "file": "corridor-tall-500.webp",
+        "w": 500,
+        "h": 667,
+        "bytes": 16172
+      }
+    ]
+  },
+  "mask": {
+    "color": "#181820",
+    "wide": [
+      {
+        "file": "mask-wide-1600.webp",
+        "w": 1600,
+        "h": 1000,
+        "bytes": 26976
+      },
+      {
+        "file": "mask-wide-1100.webp",
+        "w": 1100,
+        "h": 688,
+        "bytes": 15818
+      },
+      {
+        "file": "mask-wide-700.webp",
+        "w": 700,
+        "h": 438,
+        "bytes": 8572
+      }
+    ],
+    "tall": [
+      {
+        "file": "mask-tall-1200.webp",
+        "w": 1200,
+        "h": 1600,
+        "bytes": 45736
+      },
+      {
+        "file": "mask-tall-800.webp",
+        "w": 800,
+        "h": 1067,
+        "bytes": 27010
+      },
+      {
+        "file": "mask-tall-500.webp",
+        "w": 500,
+        "h": 667,
+        "bytes": 15300
+      }
+    ]
+  },
+  "posters": {
+    "color": "#272321",
+    "wide": [
+      {
+        "file": "posters-wide-1600.webp",
+        "w": 1600,
+        "h": 1000,
+        "bytes": 35420
+      },
+      {
+        "file": "posters-wide-1100.webp",
+        "w": 1100,
+        "h": 688,
+        "bytes": 20410
+      },
+      {
+        "file": "posters-wide-700.webp",
+        "w": 700,
+        "h": 438,
+        "bytes": 10764
+      }
+    ],
+    "tall": [
+      {
+        "file": "posters-tall-1200.webp",
+        "w": 1200,
+        "h": 1600,
+        "bytes": 70190
+      },
+      {
+        "file": "posters-tall-800.webp",
+        "w": 800,
+        "h": 1067,
+        "bytes": 37450
+      },
+      {
+        "file": "posters-tall-500.webp",
+        "w": 500,
+        "h": 667,
+        "bytes": 19610
+      }
+    ]
+  },
+  "hero": {
+    "color": "#320208",
+    "wide": [
+      {
+        "file": "hero-wide-1920.webp",
+        "w": 1920,
+        "h": 1080,
+        "bytes": 56926
+      },
+      {
+        "file": "hero-wide-1280.webp",
+        "w": 1280,
+        "h": 720,
+        "bytes": 31806
+      },
+      {
+        "file": "hero-wide-820.webp",
+        "w": 820,
+        "h": 461,
+        "bytes": 17762
+      }
+    ],
+    "tall": [
+      {
+        "file": "hero-tall-1200.webp",
+        "w": 1200,
+        "h": 1680,
+        "bytes": 44722
+      },
+      {
+        "file": "hero-tall-760.webp",
+        "w": 760,
+        "h": 1064,
+        "bytes": 24578
+      }
+    ]
+  },
+  "about": {
+    "color": "#322b27",
+    "tall": [
+      {
+        "file": "about-tall-1100.webp",
+        "w": 1100,
+        "h": 1375,
+        "bytes": 28432
+      },
+      {
+        "file": "about-tall-700.webp",
+        "w": 700,
+        "h": 875,
+        "bytes": 14780
+      }
+    ]
+  },
+  "price-dom": {
+    "color": "#b48c69",
+    "tall": [
+      {
+        "file": "price-dom-1200.webp",
+        "w": 1200,
+        "h": 2133,
+        "bytes": 264512
+      },
+      {
+        "file": "price-dom-700.webp",
+        "w": 700,
+        "h": 1244,
+        "bytes": 152160
+      }
+    ]
+  },
+  "price-pila-a": {
+    "color": "#a58060",
+    "tall": [
+      {
+        "file": "price-pila-a-1200.webp",
+        "w": 1200,
+        "h": 2133,
+        "bytes": 269098
+      },
+      {
+        "file": "price-pila-a-700.webp",
+        "w": 700,
+        "h": 1244,
+        "bytes": 153982
+      }
+    ]
+  },
+  "price-pila-b": {
+    "color": "#a88262",
+    "tall": [
+      {
+        "file": "price-pila-b-1200.webp",
+        "w": 1200,
+        "h": 2133,
+        "bytes": 268298
+      },
+      {
+        "file": "price-pila-b-700.webp",
+        "w": 700,
+        "h": 1244,
+        "bytes": 154944
+      }
+    ]
+  }
+}

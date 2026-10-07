@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Объект №4">
+  <rect width="64" height="64" fill="#0b0b0c"/>
+  <g>
+    <rect x="46" y="8" width="11" height="48" fill="#efece6"/>
+    <rect x="7" y="8" width="11" height="30" fill="#efece6"/>
+    <rect x="7" y="27" width="50" height="11" fill="#e13b22"/>
+  </g>
+</svg>
