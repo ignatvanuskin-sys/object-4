@@ -47,7 +47,10 @@ export function SiteHeader() {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ${
           scrolled || open
-            ? "border-b border-white/10 bg-ink/90 backdrop-blur-md"
+            // Solid, not translucent: Tailwind v4 compiles `bg-ink/90` to
+            // `color-mix(in oklab, …)`, and an older Instagram WebView drops that
+            // declaration — leaving a floating bar with no background at all.
+            ? "border-b border-white/10 bg-ink"
             : "border-b border-transparent bg-transparent"
         }`}
       >

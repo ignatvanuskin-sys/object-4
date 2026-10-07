@@ -107,6 +107,26 @@ body {
   max-width: 62ch;
 }
 
+/**
+ * `svh` landed in iOS 15.4. Instagram's in-app browser on anything older drops
+ * the declaration outright — and because Tailwind emits only the `svh` variant,
+ * the hero would collapse to its content height instead of filling the screen.
+ * Declaring `vh` first gives every WebView a sane fallback; the `svh` line then
+ * wins wherever it is understood, which fixes the mobile URL-bar jump.
+ */
+.screen-h {
+  min-height: 100vh;
+}
+
+/* Written as an explicit @supports block, not as two declarations: the
+   minifier collapses a duplicate `min-height` and keeps only the `svh` line,
+   which is exactly the fallback that older WebViews need. */
+@supports (height: 100svh) {
+  .screen-h {
+    min-height: 100svh;
+  }
+}
+
 /* --------------------------------------------------------------------------
    Texture — grain keeps the large dark planes from looking like flat digital
    fill, a slow vignette pushes the edges of the page into the dark.

@@ -46,7 +46,8 @@ export function MobileCta() {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-30 border-t border-white/12 bg-ink/95 px-3 pt-3 backdrop-blur-md transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden ${
+      // Solid background on purpose — see the note in site-header.tsx.
+      className={`fixed inset-x-0 bottom-0 z-30 border-t border-white/12 bg-ink px-3 pt-3 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden ${
         visible ? "translate-y-0" : "translate-y-full"
       }`}
       style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <section className="relative isolate flex min-h-[80svh] items-center bg-ink text-paper">
+    <section className="relative isolate flex min-h-[70vh] items-center bg-ink text-paper">
       <div
         className="grid-lines absolute inset-0"
         style={{ "--grid-color": "rgba(231,227,219,0.04)" } as React.CSSProperties}
