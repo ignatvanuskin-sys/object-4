@@ -59,9 +59,9 @@ export function Lightbox({
           aria-label={title}
           // Solid: the viewer covers the page, so transparency buys nothing and
           // color-mix() would drop the background on an older WebView.
-          className="fixed inset-0 z-[70] flex flex-col bg-ink"
+          className="overscroll-contain safe-top fixed inset-0 z-[70] flex flex-col bg-ink"
         >
-          <div className="flex items-center justify-between gap-4 border-b border-white/12 px-5 py-4 sm:px-8">
+          <div className="flex items-center justify-between gap-4 border-b border-white/12 pad-x py-4">
             <p className="label text-paper/60">{title}</p>
             <button
               ref={closeRef}
@@ -76,7 +76,7 @@ export function Lightbox({
             </button>
           </div>
 
-          <div className="flex-1 overflow-auto px-5 py-6 sm:px-8">
+          <div className="flex-1 overflow-auto pad-x py-6">
             <Photo
               id={id}
               kind={kind}

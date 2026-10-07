@@ -72,13 +72,17 @@ export function Arrow({ className = "" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 12"
-      className={`h-3 w-6 shrink-0 ${className}`}
+      className="h-3 w-6 shrink-0"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.4"
       aria-hidden="true"
     >
-      <path d="M0 6h22M17 1.2 22.2 6 17 10.8" />
+      {/* Transform on a <g> with transform-box: fill-box, per the SVG guidance,
+          rather than transforming the <svg> element itself. */}
+      <g className={`[transform-box:fill-box] [transform-origin:center] ${className}`}>
+        <path d="M0 6h22M17 1.2 22.2 6 17 10.8" />
+      </g>
     </svg>
   );
 }

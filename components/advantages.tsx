@@ -11,7 +11,7 @@ const spec = [
 export function Advantages() {
   return (
     <section id="why" className="relative bg-ink text-paper">
-      <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
+      <div className="mx-auto max-w-[1440px] pad-x py-20 lg:py-32">
         <div data-reveal>
           <Eyebrow index="04">Почему объект</Eyebrow>
         </div>

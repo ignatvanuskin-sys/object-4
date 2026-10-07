@@ -89,8 +89,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0b0b0c",
+  // Must match --color-ink, or mobile browser chrome is a different shade than
+  // the page. `viewportFit: cover` is what makes env(safe-area-inset-*) report
+  // real values — without it every safe-area rule in globals.css is inert.
+  themeColor: "#050506",
   colorScheme: "dark",
+  viewportFit: "cover",
 };
 
 const jsonLd = {

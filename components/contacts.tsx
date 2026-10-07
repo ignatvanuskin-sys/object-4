@@ -15,7 +15,7 @@ const links = [
 export function Contacts() {
   return (
     <section id="contacts" className="bg-shale text-paper">
-      <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
+      <div className="mx-auto max-w-[1440px] pad-x py-20 lg:py-32">
         <div data-reveal>
           <Eyebrow index="08">
             Контакты

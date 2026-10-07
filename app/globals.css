@@ -66,9 +66,70 @@ body {
   outline-offset: 3px;
 }
 
-/* Anchor offset so sticky header never covers a heading. */
+/* Anchor offset so sticky header never covers a heading — and so that focusing
+   an element with the keyboard never parks it under the fixed header. */
 [id] {
   scroll-margin-top: 96px;
+}
+
+/* --------------------------------------------------------------------------
+   Touch
+   `manipulation` removes the ~300ms double-tap-zoom delay on every control.
+   The tap highlight is set deliberately instead of leaving the platform
+   default, which flashes a grey box over the dark palette.
+   -------------------------------------------------------------------------- */
+
+a,
+button,
+[role="button"],
+summary,
+input,
+textarea,
+select {
+  touch-action: manipulation;
+}
+
+html {
+  -webkit-tap-highlight-color: rgba(213, 56, 32, 0.18);
+}
+
+/* Desktop only, as the guideline specifies: scroll chaining off for fine
+   pointers, pull-to-refresh preserved for touch. */
+@media (pointer: fine) {
+  html {
+    overscroll-behavior: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Safe areas
+   `env(safe-area-inset-*)` only reports non-zero values when the viewport meta
+   opts in with `viewport-fit=cover`, which app/layout.tsx now does. These
+   helpers keep the original padding as the floor, so nothing changes on
+   devices without insets.
+   -------------------------------------------------------------------------- */
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.pad-x {
+  padding-left: max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
+}
+
+@media (min-width: 640px) {
+  .pad-x {
+    padding-left: max(2rem, env(safe-area-inset-left));
+    padding-right: max(2rem, env(safe-area-inset-right));
+  }
+}
+
+@media (min-width: 1024px) {
+  .pad-x {
+    padding-left: max(3rem, env(safe-area-inset-left));
+    padding-right: max(3rem, env(safe-area-inset-right));
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -183,17 +244,30 @@ body {
 }
 
 /* The marker element [data-reveal-clip] stays unclipped — it is what the
-   IntersectionObserver watches. Only its .clip-target child carries the
-   curtain. Clipping the observed element itself would collapse its
-   intersection rectangle and the reveal would never fire. */
-.js-reveal [data-reveal-clip] .clip-target {
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path 1.15s var(--ease-quint);
-  transition-delay: var(--reveal-delay, 0ms);
+   IntersectionObserver watches. Its .clip-target child carries a curtain that
+   slides away, and the curtain is a pseudo-element animated with `transform`
+   only. The first version animated `clip-path`, which repaints the whole frame
+   on every tick; the guidelines call for compositor-friendly properties. */
+.clip-target {
+  position: relative;
+  overflow: hidden;
 }
 
-.js-reveal [data-reveal-clip="in"] .clip-target {
-  clip-path: inset(0 0 0 0);
+.js-reveal [data-reveal-clip] .clip-target::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: 2;
+  background: var(--curtain, var(--color-shale));
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.15s var(--ease-quint);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.js-reveal [data-reveal-clip="in"] .clip-target::after {
+  transform: translate3d(0, -101%, 0);
 }
 
 /* Slow image push on hover, only on pointer devices. */
@@ -257,12 +331,14 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  [data-reveal],
-  [data-reveal-clip] .clip-target {
+  [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
-    clip-path: none !important;
     transition: none !important;
+  }
+  /* The curtain is removed outright rather than transitioned away. */
+  [data-reveal-clip] .clip-target::after {
+    display: none !important;
   }
   .ticker-track {
     animation: none !important;

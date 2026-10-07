@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Arrow, Eyebrow } from "@/components/ui";
 import { Lightbox } from "@/components/lightbox";
 import { Photo } from "@/components/photo";
+import { money } from "@/lib/format";
 import { locations, site, type Location } from "@/lib/site";
 
 function priceMax(loc: Location) {
-  return Math.max(...loc.prices.map((p) => Number(p.price.replace(/\D/g, ""))));
+  return Math.max(...loc.prices.map((p) => p.amount));
 }
 
 /** Price grid: composition, a proportional rule, and the price itself. */
@@ -23,7 +24,7 @@ function PriceTable({ loc }: { loc: Location }) {
       </div>
       <ul>
         {loc.prices.map((row) => {
-          const value = Number(row.price.replace(/\D/g, ""));
+          const value = row.amount;
           return (
             <li
               key={row.players}
@@ -39,7 +40,7 @@ function PriceTable({ loc }: { loc: Location }) {
                 />
               </span>
               <span className="num ml-auto shrink-0 text-[1.0625rem] tracking-wide sm:ml-0">
-                {row.price}
+                {money(row.amount)}
               </span>
             </li>
           );
@@ -101,11 +102,25 @@ function LocationDetail({ loc }: { loc: Location }) {
 
 export function Locations() {
   const [active, setActive] = useState(0);
+
+  // Deep link: /#loc-pila selects that location on load.
+  useEffect(() => {
+    const match = window.location.hash.match(/^#loc-(.+)$/);
+    if (!match) return;
+    const index = locations.findIndex((l) => l.id === match[1]);
+    if (index >= 0) setActive(index);
+  }, []);
+
+  /** The switcher is a tab control, so its state belongs in the URL. */
+  const select = (index: number) => {
+    setActive(index);
+    window.history.replaceState(null, "", `#loc-${locations[index].id}`);
+  };
   const current = locations[active];
 
   return (
     <section id="locations" className="relative bg-ink text-paper">
-      <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
+      <div className="mx-auto max-w-[1440px] pad-x py-20 lg:py-32">
         <div data-reveal>
           <Eyebrow index="02">Локации и цены</Eyebrow>
         </div>
@@ -169,7 +184,7 @@ export function Locations() {
                     <h3>
                       <button
                         type="button"
-                        onClick={() => setActive(i)}
+                        onClick={() => select(i)}
                         aria-expanded={isActive}
                         aria-controls="loc-detail"
                         className="group flex w-full items-center gap-5 py-6 text-left"
@@ -197,7 +212,9 @@ export function Locations() {
 
                         <span className="hidden shrink-0 text-right sm:block">
                           <span className="label block text-paper/55">от</span>
-                          <span className="num block text-[1.0625rem] text-paper">{loc.from}</span>
+                          <span className="num block text-[1.0625rem] text-paper">
+                            {money(loc.fromAmount)}
+                          </span>
                         </span>
 
                         <Arrow

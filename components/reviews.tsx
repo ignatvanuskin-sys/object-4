@@ -1,4 +1,5 @@
 import { Eyebrow } from "@/components/ui";
+import { formatDate } from "@/lib/format";
 import { featuredReview, reviews, site } from "@/lib/site";
 
 // role="img" is required here: aria-label on a bare span is a prohibited
@@ -22,7 +23,7 @@ function Stars({ className = "" }: { className?: string }) {
 export function Reviews() {
   return (
     <section id="reviews" className="bg-shale text-paper">
-      <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
+      <div className="mx-auto max-w-[1440px] pad-x py-20 lg:py-32">
         <div data-reveal>
           <Eyebrow index="05">
             Отзывы гостей
@@ -68,7 +69,7 @@ export function Reviews() {
               </blockquote>
               <figcaption className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
                 <span className="text-[0.9375rem] text-paper">{featuredReview.author}</span>
-                <span className="label text-paper/55">{featuredReview.date}</span>
+                <span className="label text-paper/55">{formatDate(featuredReview.dateISO)}</span>
                 <span className="label text-paper/55">· {featuredReview.visits}</span>
                 <span className="label border border-white/14 px-2.5 py-1 text-paper/55">
                   Отзыв подтверждён
@@ -79,7 +80,7 @@ export function Reviews() {
             <ul className="mt-12 grid gap-x-10 sm:grid-cols-2">
               {reviews.map((r, i) => (
                 <li
-                  key={`${r.author}-${r.date}`}
+                  key={`${r.author}-${r.dateISO}`}
                   className="border-t border-white/12 py-6"
                   data-reveal
                   style={{ "--reveal-delay": `${i * 40}ms` } as React.CSSProperties}
@@ -88,7 +89,7 @@ export function Reviews() {
                   <p className="text-[0.9375rem] leading-relaxed text-paper/65">«{r.text}»</p>
                   <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
                     <span className="text-[0.875rem] text-paper">{r.author}</span>
-                    <span className="label text-paper/65">{r.date}</span>
+                    <span className="label text-paper/65">{formatDate(r.dateISO)}</span>
                     {r.visits ? <span className="label text-paper/65">· {r.visits}</span> : null}
                     {r.meta ? <span className="label text-ember">{r.meta}</span> : null}
                   </p>

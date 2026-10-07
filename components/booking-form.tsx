@@ -6,8 +6,13 @@ import { site } from "@/lib/site";
 type Status = "idle" | "sending" | "sent" | "error";
 type FieldName = "name" | "phone";
 
+/**
+ * No `focus:outline-none` here: removing the outline needs a replacement that
+ * a keyboard user can actually see. The global `:focus-visible` ring is that
+ * replacement, and the border colour shift stays for pointer feedback.
+ */
 const fieldBase =
-  "w-full border-b bg-transparent py-4 text-[1rem] text-paper placeholder:text-paper/65 transition-colors duration-300 focus:outline-none";
+  "w-full border-b bg-transparent py-4 text-[1rem] text-paper placeholder:text-paper/65 transition-colors duration-300";
 
 /** The invalid state has to be visible, not just announced. */
 const fieldCls = (bad = false) =>
@@ -148,7 +153,7 @@ export function BookingForm() {
             type="text"
             required
             autoComplete="name"
-            placeholder="Как к вам обращаться"
+            placeholder="Например: Айдана…"
             className={fieldCls(invalid === "name")}
             aria-invalid={invalid === "name"}
             aria-describedby={invalid === "name" ? "bf-error" : undefined}
@@ -167,7 +172,7 @@ export function BookingForm() {
             required
             autoComplete="tel"
             inputMode="tel"
-            placeholder="+7 ___ ___ __ __"
+            placeholder="+7 ___ ___ __ __…"
             className={fieldCls(invalid === "phone")}
             aria-invalid={invalid === "phone"}
             aria-describedby={invalid === "phone" ? "bf-error" : undefined}
@@ -182,7 +187,7 @@ export function BookingForm() {
             id="bf-comment"
             name="comment"
             rows={3}
-            placeholder="Дата, время, локация и количество человек"
+            placeholder="Дата, время, локация, количество человек…"
             className={`${fieldCls()} resize-none`}
           />
         </div>

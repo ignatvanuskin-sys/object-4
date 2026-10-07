@@ -1,6 +1,6 @@
 import { Eyebrow } from "@/components/ui";
 import { Photo } from "@/components/photo";
-import { site } from "@/lib/site";
+import { brandFull, site } from "@/lib/site";
 
 const facts = [
   { label: "Город", value: `${site.city}, ${site.region}` },
@@ -18,7 +18,7 @@ export function About() {
       className="grid-lines relative isolate bg-shale text-paper"
       style={{ "--grid-color": "rgba(231,227,219,0.045)" } as React.CSSProperties}
     >
-      <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
+      <div className="mx-auto max-w-[1440px] pad-x py-20 lg:py-32">
         <div data-reveal>
           <Eyebrow index="01">
             Объект
@@ -43,7 +43,7 @@ export function About() {
                 data-reveal
                 style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
               >
-                {site.mark} {site.markIndex} — хоррор-квест в {site.cityIn}, {site.region}. Две локации:
+                {brandFull} — хоррор-квест в {site.cityIn}, {site.region}. Две локации:
                 «Дом проклятых» на 2–8 человек и «Пила» — одна команда до десяти. Внутри работают
                 живые актёры: в отзывах на 2ГИС гости называют их по именам и отдельно благодарят
                 администраторов.

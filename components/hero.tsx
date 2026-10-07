@@ -129,7 +129,7 @@ export function Hero() {
           {strip.map((item, i) => (
             <div
               key={item.label}
-              className={`min-w-0 border-white/12 px-5 py-5 sm:px-8 lg:px-12 ${
+              className={`min-w-0 border-white/12 pad-x py-5 ${
                 i % 2 === 0 ? "border-r" : ""
               } ${i < 2 ? "border-b lg:border-b-0" : ""} ${i === 2 ? "lg:border-r" : ""}`}
             >

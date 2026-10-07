@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { navItems, site, year } from "@/lib/site";
+import { brandFull, navItems, site, year } from "@/lib/site";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-white/10 bg-ink text-paper">
-      <div className="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
+      <div className="mx-auto max-w-[1440px] pad-x py-14 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <p className="flex items-baseline gap-2">
+            <p className="flex items-baseline gap-2" translate="no">
               <span className="display text-[2rem] text-paper">{site.mark}</span>
               <span className="num text-[1.25rem] text-ember">{site.markIndex}</span>
             </p>
@@ -82,7 +82,7 @@ export function SiteFooter() {
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="label text-paper/55">
-              © {year} {site.mark} {site.markIndex} · {site.city}
+              © {year} {brandFull} · {site.city}
             </p>
             <p className="label text-paper/55">Запись ежедневно {site.hoursShort}</p>
           </div>

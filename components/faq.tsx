@@ -1,15 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Eyebrow } from "@/components/ui";
 import { faq, site } from "@/lib/site";
 
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
+  // Deep link: /#faq-panel-3 opens that answer on load.
+  useEffect(() => {
+    const match = window.location.hash.match(/^#faq-panel-(\d+)$/);
+    if (!match) return;
+    const index = Number(match[1]);
+    if (index >= 0 && index < faq.length) setOpen(index);
+  }, []);
+
+  /** Keeps the expanded panel in the URL so the state is shareable. */
+  const toggle = (index: number) => {
+    const next = open === index ? null : index;
+    setOpen(next);
+    window.history.replaceState(
+      null,
+      "",
+      next === null ? window.location.pathname : `#faq-panel-${next}`,
+    );
+  };
+
   return (
     <section id="faq" className="bg-shale text-paper">
-      <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
+      <div className="mx-auto max-w-[1440px] pad-x py-20 lg:py-32">
         <div data-reveal>
           <Eyebrow index="07">
             Что обычно спрашивают
@@ -67,11 +86,11 @@ export function Faq() {
                     <h3>
                       <button
                         type="button"
-                        onClick={() => setOpen(isOpen ? null : i)}
+                        onClick={() => toggle(i)}
                         aria-expanded={isOpen}
                         aria-controls={`faq-panel-${i}`}
                         id={`faq-control-${i}`}
-                        className="flex w-full items-center gap-5 py-5 text-left"
+                        className="group flex w-full items-center gap-5 py-5 text-left transition-colors hover:text-ember"
                       >
                         <span
                           className={`label num w-6 shrink-0 transition-colors duration-300 ${
@@ -80,7 +99,11 @@ export function Faq() {
                         >
                           {String(i + 1).padStart(2, "0")}
                         </span>
-                        <span className="flex-1 text-[1.0625rem] leading-snug text-paper">
+                        <span
+                          className={`flex-1 text-[1.0625rem] leading-snug transition-colors duration-300 ${
+                            isOpen ? "text-paper" : "text-paper group-hover:text-ember"
+                          }`}
+                        >
                           {item.q}
                         </span>
                         <span

@@ -6,7 +6,9 @@ import { navItems, site } from "@/lib/site";
 
 function Wordmark({ compact = false }: { compact?: boolean }) {
   return (
-    <span className="flex items-baseline gap-1.5 leading-none">
+    // translate="no": auto-translation would otherwise convert the brand
+    // «ОБЪЕКТ» into an ordinary noun.
+    <span className="flex items-baseline gap-1.5 leading-none" translate="no">
       <span
         className={`display text-paper ${compact ? "text-[1.05rem]" : "text-[1.25rem]"} tracking-[0.02em]`}
       >
@@ -45,7 +47,7 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ${
+        className={`safe-top fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-500 ${
           scrolled || open
             // Solid, not translucent: Tailwind v4 compiles `bg-ink/90` to
             // `color-mix(in oklab, …)`, and an older Instagram WebView drops that
@@ -54,7 +56,7 @@ export function SiteHeader() {
             : "border-b border-transparent bg-transparent"
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-6 px-5 sm:px-8 lg:h-[72px] lg:px-12">
+        <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-6 pad-x lg:h-[72px] lg:px-12">
           <Link
             href="#top"
             aria-label={`${site.mark} ${site.markIndex} — на начало страницы`}
@@ -116,12 +118,14 @@ export function SiteHeader() {
       <div
         id="mobile-menu"
         aria-hidden={!open}
-        className={`fixed inset-0 z-40 bg-ink transition-[opacity,visibility] duration-400 lg:hidden ${
+        // `overscroll-contain` stops the page behind the drawer from scroll
+        // chaining, which the guideline asks for on any full-screen overlay.
+        className={`overscroll-contain fixed inset-0 z-40 overflow-y-auto bg-ink transition-[opacity,visibility] duration-400 lg:hidden ${
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
         <div className="grid-lines flex h-full flex-col justify-between pt-24 pb-8">
-          <nav aria-label="Мобильная навигация" className="px-5 sm:px-8">
+          <nav aria-label="Мобильная навигация" className="pad-x">
             <ul>
               {navItems.map((item, i) => (
                 <li key={item.href} className="border-b border-white/10">
@@ -143,7 +147,7 @@ export function SiteHeader() {
             </ul>
           </nav>
 
-          <div className="px-5 sm:px-8">
+          <div className="pad-x">
             <div className="mb-6 space-y-2">
               <a
                 href={site.phoneHref}

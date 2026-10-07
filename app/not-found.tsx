@@ -17,7 +17,7 @@ export default function NotFound() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto w-full max-w-[1440px] px-5 py-28 sm:px-8 lg:px-12">
+      <div className="relative mx-auto w-full max-w-[1440px] pad-x py-28">
         <p className="label text-ember">Ошибка 404</p>
 
         <h1 className="display mt-6 max-w-[18ch] text-[clamp(2rem,6.4vw,4.75rem)] text-paper">

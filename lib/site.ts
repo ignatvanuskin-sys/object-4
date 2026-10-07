@@ -59,7 +59,14 @@ export const site = {
   ],
 } as const;
 
-export type PriceRow = { players: string; price: string; highlight?: boolean };
+/** `amount` is a real number so it can go through Intl.NumberFormat. */
+/**
+ * Полное имя бренда с НЕразрывным пробелом: «ОБЪЕКТ» и «№4» не должны
+ * разрываться по строкам в заголовках, подписях и сниппетах выдачи.
+ */
+export const brandFull = `${site.mark}\u00a0${site.markIndex}`;
+
+export type PriceRow = { players: string; amount: number; highlight?: boolean };
 
 export type Location = {
   id: string;
@@ -67,7 +74,7 @@ export type Location = {
   name: string;
   kind: string;
   capacity: string;
-  from: string;
+  fromAmount: number;
   fromNote: string;
   mediaKey: "hall" | "stairs";
   mediaKind: "wide" | "tall";
@@ -86,7 +93,7 @@ export const locations: Location[] = [
     name: "Дом проклятых",
     kind: "Хоррор-квест",
     capacity: "от 2 до 8 человек",
-    from: "3 500 ₸",
+    fromAmount: 3500,
     fromNote: "с человека, от 4 человек",
     mediaKey: "stairs",
     mediaKind: "tall",
@@ -100,13 +107,13 @@ export const locations: Location[] = [
       { label: "Прайс", value: "Опубликован на 2ГИС" },
     ],
     prices: [
-      { players: "2 человека", price: "10 000 ₸" },
-      { players: "3 человека", price: "15 000 ₸" },
-      { players: "4 человека", price: "14 000 ₸", highlight: true },
-      { players: "5 человек", price: "17 500 ₸" },
-      { players: "6 человек", price: "21 000 ₸" },
-      { players: "7 человек", price: "24 500 ₸" },
-      { players: "8 человек", price: "28 000 ₸" },
+      { players: "2 человека", amount: 10000 },
+      { players: "3 человека", amount: 15000 },
+      { players: "4 человека", amount: 14000, highlight: true },
+      { players: "5 человек", amount: 17500 },
+      { players: "6 человек", amount: 21000 },
+      { players: "7 человек", amount: 24500 },
+      { players: "8 человек", amount: 28000 },
     ],
     priceNote: "С человека 3 500 ₸ — от 4 человек.",
     priceSheet: { label: "Прайс-лист «Дом проклятых»", mediaKey: "priceDom" },
@@ -117,7 +124,7 @@ export const locations: Location[] = [
     name: "Пила",
     kind: "Хоррор-квест",
     capacity: "одна команда до 10 человек",
-    from: "4 000 ₸",
+    fromAmount: 4000,
     fromNote: "с человека, от 4 человек",
     mediaKey: "hall",
     mediaKind: "wide",
@@ -131,14 +138,14 @@ export const locations: Location[] = [
       { label: "Команда", value: "до 10 человек" },
     ],
     prices: [
-      { players: "3 человека", price: "15 000 ₸" },
-      { players: "4 человека", price: "16 000 ₸", highlight: true },
-      { players: "5 человек", price: "20 000 ₸" },
-      { players: "6 человек", price: "24 000 ₸" },
-      { players: "7 человек", price: "28 000 ₸" },
-      { players: "8 человек", price: "32 000 ₸" },
-      { players: "9 человек", price: "36 000 ₸" },
-      { players: "10 человек", price: "40 000 ₸" },
+      { players: "3 человека", amount: 15000 },
+      { players: "4 человека", amount: 16000, highlight: true },
+      { players: "5 человек", amount: 20000 },
+      { players: "6 человек", amount: 24000 },
+      { players: "7 человек", amount: 28000 },
+      { players: "8 человек", amount: 32000 },
+      { players: "9 человек", amount: 36000 },
+      { players: "10 человек", amount: 40000 },
     ],
     priceNote: "С одного участника 4 000 ₸ — от 4 человек. Одна команда до 10 человек.",
     priceCaveat:
@@ -152,7 +159,8 @@ export const locations: Location[] = [
 export type Review = {
   text: string;
   author: string;
-  date: string;
+  /** ISO date; rendered through Intl.DateTimeFormat, never as a literal. */
+  dateISO: string;
   meta?: string;
   visits?: string;
 };
@@ -160,7 +168,7 @@ export type Review = {
 export const featuredReview: Review = {
   text: "Лучший квест, др проводила и ещё актеры и администраторы очень вайбовые, кайфовые и лучшие",
   author: "Айшуак",
-  date: "30 сентября 2026",
+  dateISO: "2026-09-30",
   visits: "5 отзывов",
 };
 
@@ -168,35 +176,35 @@ export const reviews: Review[] = [
   {
     text: "Лучшее место в котором я была, очень интересно",
     author: "Дарья Королёва",
-    date: "28 августа 2026",
+    dateISO: "2026-08-28",
     visits: "7 посещений",
   },
   {
     text: "самый лучший квест во всей костанайской области",
     author: "Дарья Шепеляк",
-    date: "5 сентября 2026",
+    dateISO: "2026-09-05",
   },
   {
     text: "Классный квест, Актер Нуржан имба",
     author: "Нуржан Алдияров",
-    date: "7 апреля 2026",
+    dateISO: "2026-04-07",
     visits: "2 посещения",
   },
   {
     text: "Крутое место. Можно отметить день рождения",
     author: "Vladlen Pauli",
-    date: "28 марта 2026",
+    dateISO: "2026-03-28",
     meta: "Частый гость",
   },
   {
     text: "Самый крутой квест приходите сюда очень весело и страшно",
     author: "Ангелина Рогачёва",
-    date: "5 сентября 2026",
+    dateISO: "2026-09-05",
   },
   {
     text: "очень понравилось, крутой администратор",
     author: "Ксения Попова",
-    date: "5 сентября 2026",
+    dateISO: "2026-09-05",
   },
 ];
 

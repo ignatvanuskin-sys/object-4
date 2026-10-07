@@ -21,7 +21,7 @@ export function FinalCta() {
       <div className="grain absolute inset-0" aria-hidden="true" />
       <div className="vignette absolute inset-0" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto max-w-[1440px] px-5 py-24 sm:px-8 lg:px-12 lg:py-36">
+      <div className="relative z-10 mx-auto max-w-[1440px] pad-x py-24 lg:py-36">
         <div className="max-w-[min(100%,54rem)]">
           <p className="label text-paper/55" data-reveal>
             Запись · {site.city} · {site.hoursShort}

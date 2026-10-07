@@ -47,7 +47,7 @@ export function MobileCta() {
   return (
     <div
       // Solid background on purpose — see the note in site-header.tsx.
-      className={`fixed inset-x-0 bottom-0 z-30 border-t border-white/12 bg-ink px-3 pt-3 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden ${
+      className={`fixed inset-x-0 bottom-0 z-30 border-t border-white/12 bg-ink pt-3 pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden ${
         visible ? "translate-y-0" : "translate-y-full"
       }`}
       style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
@@ -56,7 +56,7 @@ export function MobileCta() {
       <div className="grid grid-cols-2 gap-2.5">
         <a
           href={site.phoneHref}
-          className="label flex min-h-[52px] items-center justify-center gap-2 border border-white/25 text-paper"
+          className="label flex min-h-[52px] items-center justify-center gap-2 border border-white/25 text-paper transition-colors hover:border-paper hover:bg-paper hover:text-ink active:border-paper active:bg-paper active:text-ink"
           tabIndex={visible ? 0 : -1}
         >
           <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
@@ -68,7 +68,7 @@ export function MobileCta() {
           href={site.whatsapp}
           target="_blank"
           rel="noopener noreferrer"
-          className="label flex min-h-[52px] items-center justify-center gap-2 bg-signal text-white"
+          className="label flex min-h-[52px] items-center justify-center gap-2 bg-signal text-white transition-colors hover:bg-signal-deep active:bg-signal-deep"
           tabIndex={visible ? 0 : -1}
         >
           <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
