@@ -18,7 +18,11 @@ export function Hero() {
     // min-height on both, the info strip was pushed 107px past the fold and
     // only became visible after a scroll. Here the hero copy flexes to fill
     // whatever the strip leaves over.
-    <section id="top" className="screen-h relative isolate flex flex-col overflow-hidden bg-ink">
+    <section
+      id="top"
+      data-spotlight
+      className="screen-h sweep relative isolate flex flex-col overflow-hidden bg-ink"
+    >
       {/* Art direction: a portrait crop for phones, the cinematic 16:9 for desktop. */}
       <picture>
         <source
@@ -52,10 +56,14 @@ export function Hero() {
         className="absolute inset-0 bg-gradient-to-r from-ink via-ink/60 to-transparent"
         aria-hidden="true"
       />
+      {/* The pointer light sits under the copy, over the photograph. */}
+      <span className="spotlight" aria-hidden="true" />
+      <div className="scanlines absolute inset-0" aria-hidden="true" />
       <div className="grain absolute inset-0" aria-hidden="true" />
+      <div className="grain-live absolute inset-0" aria-hidden="true" />
       <div className="vignette absolute inset-0" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-5 pt-20 sm:px-8 lg:px-12 lg:pt-28">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col pad-x pt-20 lg:pt-28">
         <div className="flex-1" />
 
         {/* Tightened so that the hero plus the info strip fit inside one
@@ -73,14 +81,23 @@ export function Hero() {
             <span>{site.tagline}</span>
           </p>
 
+          {/* Each line slides out of its own mask, staggered — the statements
+              stay put while the movement happens, instead of the whole block
+              drifting as one piece. */}
           <h1
             className="display mt-5 text-[clamp(2.1rem,6.2vw,5.5rem)] text-paper"
             data-reveal
             style={{ "--reveal-delay": "90ms" } as React.CSSProperties}
           >
-            Вход добровольный.
-            <br />
-            <span className="text-paper/75">Выход — по правилам объекта.</span>
+            <span className="mask-line">
+              <span>Вход добровольный.</span>
+            </span>
+            <span
+              className="mask-line"
+              style={{ "--reveal-delay": "210ms" } as React.CSSProperties}
+            >
+              <span className="text-paper/75">Выход — по правилам объекта.</span>
+            </span>
           </h1>
 
           <p

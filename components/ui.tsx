@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 /**
  * Micro technical label: `[ 02 ] ЛОКАЦИИ` with a hairline running to the edge.
@@ -16,11 +16,49 @@ export function Eyebrow({
 }) {
   return (
     <div className={`flex items-baseline gap-4 ${className}`}>
-      <span className="label shrink-0 text-paper/55">
+      {/* `data-decode`: the label resolves out of a glyph shuffle when it
+          scrolls into view — the readout language of an archive. */}
+      <span className="label shrink-0 text-paper/55" data-decode>
         {index ? `[ ${index} ]` : null} {children}
       </span>
       <span className="h-px flex-1 bg-white/12" aria-hidden="true" />
     </div>
+  );
+}
+
+/**
+ * Splits a heading into per-word spans that assemble on reveal.
+ *
+ * The space between words stays a plain text node *outside* the inline-blocks,
+ * so lines still wrap at the real spaces — putting the space inside the box
+ * would stop the line from ever breaking there. Purely presentational: the
+ * words remain ordinary selectable, screen-readable text.
+ */
+export function StaggerText({
+  text,
+  base = 0,
+  step = 42,
+}: {
+  text: string;
+  base?: number;
+  step?: number;
+}) {
+  const words = text.split(" ");
+  return (
+    <>
+      {words.map((word, i) => (
+        <Fragment key={`${word}-${i}`}>
+          <span
+            className="inline-block"
+            data-stagger
+            style={{ "--reveal-delay": `${base + i * step}ms` } as React.CSSProperties}
+          >
+            {word}
+          </span>
+          {i < words.length - 1 ? " " : null}
+        </Fragment>
+      ))}
+    </>
   );
 }
 

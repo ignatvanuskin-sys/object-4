@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Eyebrow } from "@/components/ui";
+import { Eyebrow, StaggerText } from "@/components/ui";
 import { processSteps } from "@/lib/site";
 
 export function Process() {
@@ -43,7 +43,7 @@ export function Process() {
             className="display text-[clamp(1.9rem,4.4vw,3.5rem)] text-paper lg:col-span-7"
             data-reveal
           >
-            От сообщения до закрытой двери — шесть шагов.
+            <StaggerText text="От сообщения до закрытой двери — шесть шагов." />
           </h2>
           <p
             className="measure text-[0.9375rem] leading-relaxed text-paper/55 lg:col-span-4 lg:col-start-9"

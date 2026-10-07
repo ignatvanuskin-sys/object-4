@@ -1,4 +1,4 @@
-import { Eyebrow } from "@/components/ui";
+import { Eyebrow, StaggerText } from "@/components/ui";
 import { Lightbox } from "@/components/lightbox";
 import { Photo } from "@/components/photo";
 import type { MediaKey, MediaKind } from "@/lib/media";
@@ -95,8 +95,9 @@ function Tile({ tile, delay = 0 }: { tile: Tile; delay?: number }) {
 
 export function Atmosphere() {
   return (
-    <section id="atmosphere" className="bg-shale text-paper">
-      <div className="mx-auto max-w-[1440px] pad-x py-20 lg:py-32">
+    <section id="atmosphere" className="glow-breathe relative bg-shale text-paper">
+      {/* Content sits above the glow so the red wash never touches the type. */}
+      <div className="relative z-10 mx-auto max-w-[1440px] pad-x py-20 lg:py-32">
         <div data-reveal>
           <Eyebrow index="03">
             Атмосфера
@@ -108,7 +109,7 @@ export function Atmosphere() {
             className="display max-w-[26ch] text-[clamp(1.9rem,4.4vw,3.5rem)] text-paper"
             data-reveal
           >
-            Фотографии сделаны внутри объекта — не в студии.
+            <StaggerText text="Фотографии сделаны внутри объекта — не в студии." />
           </h2>
           <p
             className="measure text-[0.9375rem] leading-relaxed text-paper/65 lg:max-w-[36ch]"

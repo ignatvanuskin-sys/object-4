@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Arrow, Eyebrow } from "@/components/ui";
+import { Arrow, Eyebrow, StaggerText } from "@/components/ui";
 import { Lightbox } from "@/components/lightbox";
 import { Photo } from "@/components/photo";
 import { money } from "@/lib/format";
@@ -152,7 +152,7 @@ export function Locations() {
             className="display max-w-[22ch] text-[clamp(1.9rem,4.4vw,3.5rem)] text-paper"
             data-reveal
           >
-            Две локации. Разная вместимость — разная цена.
+            <StaggerText text="Две локации. Разная вместимость — разная цена." />
           </h2>
           <p
             className="measure text-[0.9375rem] leading-relaxed text-paper/55 lg:max-w-[34ch]"

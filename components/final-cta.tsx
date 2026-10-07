@@ -1,10 +1,21 @@
 import { Photo } from "@/components/photo";
+import { StaggerText } from "@/components/ui";
 import { site } from "@/lib/site";
 
 export function FinalCta() {
   return (
-    <section id="cta" className="relative isolate overflow-hidden bg-ink">
-      <div className="absolute inset-0" aria-hidden="true">
+    <section
+      id="cta"
+      data-spotlight
+      className="sweep relative isolate overflow-hidden bg-ink"
+    >
+      {/* Oversized by 8% top and bottom so the parallax shift never exposes an
+          edge — the wrapper moves, the photograph inside stays cover-fitted. */}
+      <div
+        className="absolute inset-x-0 -top-[8%] -bottom-[8%]"
+        data-parallax="5"
+        aria-hidden="true"
+      >
         <Photo
           id="mask"
           kind="wide"
@@ -18,7 +29,10 @@ export function FinalCta() {
         className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/45"
         aria-hidden="true"
       />
+      <span className="spotlight" aria-hidden="true" />
+      <div className="scanlines absolute inset-0" aria-hidden="true" />
       <div className="grain absolute inset-0" aria-hidden="true" />
+      <div className="grain-live absolute inset-0" aria-hidden="true" />
       <div className="vignette absolute inset-0" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto max-w-[1440px] pad-x py-24 lg:py-36">
@@ -32,7 +46,7 @@ export function FinalCta() {
             data-reveal
             style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
           >
-            Выберите вечер — дверь мы откроем.
+            <StaggerText text="Выберите вечер — дверь мы откроем." />
           </h2>
 
           <p

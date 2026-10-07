@@ -1,4 +1,4 @@
-import { Eyebrow } from "@/components/ui";
+import { Eyebrow, StaggerText } from "@/components/ui";
 import { Photo } from "@/components/photo";
 import { brandFull, site } from "@/lib/site";
 
@@ -33,8 +33,11 @@ export function About() {
               data-reveal
               style={{ "--reveal-delay": "60ms" } as React.CSSProperties}
             >
-              Мы не показываем страшилки.
-              <span className="text-paper/55"> Мы ставим вас внутрь них.</span>
+            <StaggerText text="Мы не показываем страшилки." base={60} />
+            <span className="text-paper/55">
+              {" "}
+              <StaggerText text="Мы ставим вас внутрь них." base={300} />
+            </span>
             </h2>
 
             <div className="mt-10 grid gap-8 lg:mt-12 lg:grid-cols-2 lg:gap-10">
@@ -83,14 +86,19 @@ export function About() {
             <figure className="relative">
               <div data-reveal-clip>
                 <div className="clip-target">
-                  <Photo
-                    id="about"
-                    kind="tall"
-                    alt="Лестница внутри локации «Объект №4»: тёмный пролёт, настенный светильник и рамы с кадрами на стене"
-                    sizes="(max-width: 1023px) 100vw, 33vw"
-                    className="aspect-4/5 w-full object-cover"
-                    position="50% 42%"
-                  />
+                  {/* The frame is 12% taller than its box and centred, so the
+                      parallax shift moves the photograph without ever showing
+                      the surface behind it. */}
+                  <div className="aspect-4/5 w-full" data-parallax="6">
+                    <Photo
+                      id="about"
+                      kind="tall"
+                      alt="Лестница внутри локации «Объект №4»: тёмный пролёт, настенный светильник и рамы с кадрами на стене"
+                      sizes="(max-width: 1023px) 100vw, 33vw"
+                      className="h-[112%] w-full -translate-y-[6%] object-cover"
+                      position="50% 42%"
+                    />
+                  </div>
                 </div>
               </div>
               <figcaption className="label mt-4 flex items-center gap-3 text-paper/55">

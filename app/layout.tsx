@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { MobileCta } from "@/components/mobile-cta";
+import { MotionLayer } from "@/components/motion-layer";
 import { RevealManager } from "@/components/reveal-manager";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -180,6 +181,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteFooter />
         <MobileCta />
         <RevealManager />
+        <MotionLayer />
+
+        {/* One short fade from black on first paint. Pointer-events off, so it
+            never delays interaction, and prefers-reduced-motion skips it. */}
+        <div className="veil" aria-hidden="true" />
 
         <script
           type="application/ld+json"

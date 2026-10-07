@@ -8,12 +8,16 @@
    ========================================================================== */
 
 @theme {
-  /* Surfaces — deepest to least deep. All of them are night. */
-  --color-ink: #050506;
-  --color-pit: #0b0b0d;
-  --color-ink-soft: #121114;
-  --color-shale: #16151a;
-  --color-shale-2: #1e1c22;
+  /* Surfaces — deepest to least deep. All of them are night.
+     Taken down another step: the page should read as one continuous descent
+     into black, with sections separated by a whisper of value rather than by
+     visible bands. Darkening also *raises* text contrast, so nothing here
+     costs accessibility. */
+  --color-ink: #030304;
+  --color-pit: #07070a;
+  --color-ink-soft: #0d0c10;
+  --color-shale: #121116;
+  --color-shale-2: #1a181e;
 
   /* Text — light on every surface. */
   --color-paper: #e7e3db;
@@ -214,10 +218,10 @@ html {
 
 .vignette {
   background: radial-gradient(
-    120% 80% at 50% 45%,
+    115% 78% at 50% 42%,
     transparent 0%,
-    rgba(0, 0, 0, 0.35) 62%,
-    rgba(0, 0, 0, 0.72) 100%
+    rgba(0, 0, 0, 0.42) 55%,
+    rgba(0, 0, 0, 0.82) 100%
   );
 }
 
@@ -324,6 +328,219 @@ html {
   animation: ticker 46s linear infinite;
 }
 
+/* ==========================================================================
+   Atmosphere
+   The gloom is not only a palette: the dark surfaces are alive. Grain drifts,
+   scans crawl, a red light follows the pointer. Everything below animates
+   `transform`/`opacity` only, is driven by one shared rAF loop in
+   components/motion-layer.tsx, and is switched off wholesale for
+   prefers-reduced-motion.
+   ========================================================================== */
+
+/* Drifting film grain. The layer is oversized and stepped, so the shift never
+   exposes an edge and the browser composites instead of repainting. */
+.grain-live {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.grain-live::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  opacity: 0.42;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+  animation: grain-drift 0.72s steps(5) infinite;
+  will-change: transform;
+}
+
+@keyframes grain-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  20% {
+    transform: translate3d(-1.5%, -2.5%, 0);
+  }
+  40% {
+    transform: translate3d(2%, -1%, 0);
+  }
+  60% {
+    transform: translate3d(-2%, 1.5%, 0);
+  }
+  80% {
+    transform: translate3d(1%, 2%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* CCTV scanlines over photographic surfaces. No blend mode: a plain low-alpha
+   gradient costs nothing and cannot surprise a webview. */
+.scanlines::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.045) 0 1px,
+    transparent 1px 3px
+  );
+  opacity: 0.6;
+}
+
+/* Slow breathing glow — a red pulse that makes the dark feel occupied. */
+.glow-breathe::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    60% 50% at 22% 30%,
+    rgba(213, 56, 32, 0.14),
+    transparent 68%
+  );
+  animation: breathe 11s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+/* Light that follows the pointer — the one effect the reference leads with.
+   Positioned by one rAF-throttled transform write, never by layout. */
+.spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 58rem;
+  height: 58rem;
+  margin: -29rem 0 0 -29rem;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-swift);
+  background: radial-gradient(
+    circle,
+    rgba(255, 106, 77, 0.14),
+    rgba(213, 56, 32, 0.06) 34%,
+    transparent 64%
+  );
+  will-change: transform, opacity;
+}
+
+.spotlight[data-active="on"] {
+  opacity: 1;
+}
+
+/* Page-load veil: one short fade, no spinner, no delay to interaction. */
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  background: var(--color-ink);
+  animation: veil-lift 0.75s var(--ease-quint) forwards;
+}
+
+@keyframes veil-lift {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Masked line reveal for the big statements: each line slides out of its own
+   mask. The padding/negative-margin pair exists because uppercase Cyrillic
+   «Д», «Ц» and «Щ» have descenders that a bare `overflow: hidden` would clip. */
+.mask-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+
+.mask-line > span {
+  display: block;
+  transition: transform 1.05s var(--ease-quint);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js-reveal [data-reveal] .mask-line > span {
+  transform: translate3d(0, 108%, 0);
+}
+
+.js-reveal [data-reveal="in"] .mask-line > span {
+  transform: none;
+}
+
+/* Word-by-word assembly for section headings. Each word is its own inline-block
+   so lines still break naturally at the real spaces between them — the reveal
+   only touches opacity and transform, so nothing reflows. */
+.js-reveal [data-reveal] [data-stagger] {
+  opacity: 0;
+  transform: translate3d(0, 0.55em, 0);
+  transition:
+    opacity 0.5s var(--ease-swift),
+    transform 0.85s var(--ease-quint);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.js-reveal [data-reveal="in"] [data-stagger] {
+  opacity: 1;
+  transform: none;
+}
+
+/* CRT refresh sweep: one thin band crossing the frame every few seconds, the
+   way a monitor redraws. Decorative, so it is aria-hidden and disabled for
+   reduced motion. */
+.sweep::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 22%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.035) 45%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.035) 55%,
+    transparent
+  );
+  transform: translate3d(0, -120%, 0);
+  animation: sweep 7.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: transform;
+}
+
+@keyframes sweep {
+  0% {
+    transform: translate3d(0, -120%, 0);
+  }
+  22% {
+    transform: translate3d(0, 560%, 0);
+  }
+  100% {
+    transform: translate3d(0, 560%, 0);
+  }
+}
+
 /* --------------------------------------------------------------------------
    Reduced motion — hard stop for everything decorative.
    -------------------------------------------------------------------------- */
@@ -345,7 +562,34 @@ html {
   [data-reveal-clip] .clip-target::after {
     display: none !important;
   }
-  .ticker-track {
+  .ticker-track,
+  .grain-live::after,
+  .glow-breathe::after,
+  .sweep::after,
+  .veil {
     animation: none !important;
+  }
+
+  .sweep::after {
+    display: none !important;
+  }
+
+  [data-stagger] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Static grain stays as texture; the moving layers go entirely. */
+  .veil {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  .spotlight {
+    display: none !important;
+  }
+
+  .mask-line > span {
+    transform: none !important;
   }
 }

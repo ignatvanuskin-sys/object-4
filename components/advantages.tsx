@@ -1,12 +1,17 @@
 import { Eyebrow } from "@/components/ui";
 import { advantages, site } from "@/lib/site";
 
+/** Real numbers so they can count up; each cell is a fixed-width grid track,
+ *  so the digits changing can never move anything around them (no CLS). */
 const spec = [
-  { value: site.rating, label: "рейтинг в 2ГИС" },
-  { value: String(site.ratingsCount), label: "оценок" },
-  { value: String(site.reviewsCount), label: "отзывов" },
-  { value: "2", label: "локации" },
+  { value: 5, decimals: 1, label: "рейтинг в 2ГИС" },
+  { value: site.ratingsCount, decimals: 0, label: "оценок" },
+  { value: site.reviewsCount, decimals: 0, label: "отзывов" },
+  { value: 2, decimals: 0, label: "локации" },
 ];
+
+const renderStat = (value: number, decimals: number) =>
+  value.toFixed(decimals).replace(".", ",");
 
 export function Advantages() {
   return (
@@ -30,8 +35,12 @@ export function Advantages() {
                 i === 1 ? "lg:border-r lg:pl-8" : ""
               }`}
             >
-              <dd className="num text-[clamp(2.25rem,5.4vw,3.75rem)] leading-none text-paper">
-                {s.value}
+              <dd
+                className="num text-[clamp(2.25rem,5.4vw,3.75rem)] leading-none text-paper"
+                data-count={s.value}
+                data-count-decimals={s.decimals}
+              >
+                {renderStat(s.value, s.decimals)}
               </dd>
               <dt className="label mt-3 text-paper/55">{s.label}</dt>
             </div>
