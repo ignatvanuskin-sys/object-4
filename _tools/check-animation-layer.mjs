@@ -76,6 +76,25 @@ for (const name of [
 }
 console.log(`  ${/animation-duration:\s*\.?0?\.?001ms|animation:\s*none/.test(rm) ? "OK  " : "MISS"} blanket kill (animation-duration/animation:none)`);
 
+// `will-change` pins an element to its own compositor layer. It belongs on the
+// state that is about to move, not on the state that has already arrived.
+console.log("\n=== CSS: will-change is released once the element settles ===");
+// 3 continuously-animating layers (grain, sweep, spotlight) x2 + 3 pending-state
+// hints that hand the hint back once the element settles.
+console.log("  declarations total:", c(/will-change/g));
+console.log("  ...of which release to auto when settled:", c(/will-change:\s*auto/g));
+// Patterns stay agnostic about the minifier's habits: Lightning CSS strips the
+// quotes from attribute selectors (`[data-reveal="in"]` -> `[data-reveal=in]`)
+// and the second colon from pseudo-elements (`::after` -> `:after`). Written
+// literally, both patterns silently matched nothing while the rule was present.
+for (const [label, re] of [
+  ["revealed state releases it", /\[data-reveal="?in"?\][^{]*\{[^}]*will-change:\s*auto/],
+  ["stagger settled state releases it", /\[data-stagger\][^{]*\{[^}]*will-change:\s*auto/],
+  ["curtain settled state releases it", /clip-target:{1,2}after[^{]*\{[^}]*will-change:\s*auto/],
+]) {
+  console.log(`  ${re.test(css) ? "OK  " : "MISS"} ${label}`);
+}
+
 console.log("\n=== HTML: hooks present ===");
 for (const [label, needle] of [
   ["data-spotlight section", "data-spotlight"],

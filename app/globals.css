@@ -250,9 +250,16 @@ html {
   will-change: opacity, transform;
 }
 
+/* `will-change` is a hint that a change is *imminent*, not a permanent
+   promotion. Left on the resting state it pins every revealed element to its
+   own compositor layer for the life of the page — 92 of them here, which is
+   GPU memory held for nothing on the mid-range Android this site is mostly
+   seen on. So the hidden/pending state keeps the hint (that is the frame that
+   is about to move) and the settled state hands it back. */
 .js-reveal [data-reveal="in"] {
   opacity: 1;
   transform: none;
+  will-change: auto;
 }
 
 /* The marker element [data-reveal-clip] stays unclipped — it is what the
@@ -280,6 +287,7 @@ html {
 
 .js-reveal [data-reveal-clip="in"] .clip-target::after {
   transform: translate3d(0, -101%, 0);
+  will-change: auto;
 }
 
 /* Slow image push on hover, only on pointer devices. */
@@ -504,6 +512,7 @@ html {
 .js-reveal [data-reveal="in"] [data-stagger] {
   opacity: 1;
   transform: none;
+  will-change: auto;
 }
 
 /* CRT refresh sweep: one thin band crossing the frame every few seconds, the
