@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Arrow, Eyebrow } from "@/components/ui";
 import { Lightbox } from "@/components/lightbox";
 import { Photo } from "@/components/photo";
@@ -102,6 +102,7 @@ function LocationDetail({ loc }: { loc: Location }) {
 
 export function Locations() {
   const [active, setActive] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Deep link: /#loc-pila selects that location — on load and on every later
   // hash change, since following a shared link inside the same document does
@@ -111,7 +112,17 @@ export function Locations() {
       const match = window.location.hash.match(/^#loc-(.+)$/);
       if (!match) return;
       const index = locations.findIndex((l) => l.id === match[1]);
-      if (index >= 0) setActive(index);
+      if (index < 0) return;
+      setActive(index);
+
+      // The hash carries state, not an element id, so the browser has nothing
+      // to scroll to on its own — a shared link would otherwise drop the
+      // visitor at the top of the page with the section far below.
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      sectionRef.current?.scrollIntoView({
+        behavior: reduce ? "auto" : "smooth",
+        block: "start",
+      });
     };
     sync();
     window.addEventListener("hashchange", sync);
@@ -126,7 +137,7 @@ export function Locations() {
   const current = locations[active];
 
   return (
-    <section id="locations" className="relative bg-ink text-paper">
+    <section id="locations" ref={sectionRef} className="relative bg-ink text-paper">
       <div className="mx-auto max-w-[1440px] pad-x py-20 lg:py-32">
         <div data-reveal>
           <Eyebrow index="02">Локации и цены</Eyebrow>
