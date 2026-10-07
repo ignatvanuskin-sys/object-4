@@ -57,7 +57,9 @@ export function Lightbox({
           role="dialog"
           aria-modal="true"
           aria-label={title}
-          className="fixed inset-0 z-[70] flex flex-col bg-ink/96 backdrop-blur-sm"
+          // Solid: the viewer covers the page, so transparency buys nothing and
+          // color-mix() would drop the background on an older WebView.
+          className="fixed inset-0 z-[70] flex flex-col bg-ink"
         >
           <div className="flex items-center justify-between gap-4 border-b border-white/12 px-5 py-4 sm:px-8">
             <p className="label text-paper/60">{title}</p>

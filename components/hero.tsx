@@ -113,7 +113,9 @@ export function Hero() {
         <span className="block h-20 w-px bg-gradient-to-b from-white/40 to-transparent" />
       </div>
 
-      <div className="relative z-10 border-t border-white/12 bg-ink/70 backdrop-blur-sm">
+      {/* Solid, for the same WebView reason as the header: this strip sits on
+          top of the photograph, so it must not depend on color-mix(). */}
+      <div className="relative z-10 border-t border-white/12 bg-ink">
         <dl className="mx-auto grid max-w-[1440px] grid-cols-2 lg:grid-cols-4">
           {strip.map((item, i) => (
             <div
