@@ -12,7 +12,11 @@ const strip = [
 
 export function Hero() {
   return (
-    <section id="top" className="screen-h relative isolate overflow-hidden bg-ink">
+    // The section, not the inner wrapper, owns the viewport height: with the
+    // min-height on both, the info strip was pushed 107px past the fold and
+    // only became visible after a scroll. Here the hero copy flexes to fill
+    // whatever the strip leaves over.
+    <section id="top" className="screen-h relative isolate flex flex-col overflow-hidden bg-ink">
       {/* Art direction: a portrait crop for phones, the cinematic 16:9 for desktop. */}
       <picture>
         <source
@@ -49,7 +53,7 @@ export function Hero() {
       <div className="grain absolute inset-0" aria-hidden="true" />
       <div className="vignette absolute inset-0" aria-hidden="true" />
 
-      <div className="screen-h relative z-10 mx-auto flex max-w-[1440px] flex-col px-5 pt-24 sm:px-8 lg:px-12 lg:pt-32">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-5 pt-24 sm:px-8 lg:px-12 lg:pt-32">
         <div className="flex-1" />
 
         <div className="max-w-[min(100%,60rem)] pb-10 lg:pb-16">
