@@ -138,8 +138,12 @@ export function MotionLayer() {
     function runDecode(el: HTMLElement) {
       if (el.dataset.decoded) return;
       el.dataset.decoded = "1";
-      const final = el.dataset.decode || el.textContent || "";
-      el.dataset.decode = final;
+      // `data-decode` is a marker, not a payload. A bare JSX attribute reaches
+      // the DOM as `data-decode="true"`, so treating the attribute as the text
+      // replaced every label with the literal string "true". The element's own
+      // text is the only source; the marker stays a marker.
+      const final = el.textContent || "";
+      el.dataset.decode = "1";
       if (reduce) {
         el.textContent = final;
         return;
@@ -172,8 +176,10 @@ export function MotionLayer() {
         for (const el of triggers) {
           if (el.hasAttribute("data-count")) runCount(el);
           else {
+            // Same trap as runDecode: never echo the marker attribute back into
+            // the DOM as text. Reduced motion just means no shuffle — the label
+            // is already correct as server-rendered.
             el.dataset.decoded = "1";
-            el.textContent = el.dataset.decode || el.textContent;
           }
         }
       } else {

@@ -15,3 +15,6 @@ Thumbs.db
 .vercel
 .vercel
 .env*
+_shots/
+_tools/build.log
+_tools/commit-msg.txt
