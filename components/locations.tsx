@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Arrow, Eyebrow } from "@/components/ui";
 import { Lightbox } from "@/components/lightbox";
 import { Photo } from "@/components/photo";
@@ -102,7 +102,6 @@ function LocationDetail({ loc }: { loc: Location }) {
 
 export function Locations() {
   const [active, setActive] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
 
   // Deep link: /#loc-pila selects that location — on load and on every later
   // hash change, since following a shared link inside the same document does
@@ -114,14 +113,6 @@ export function Locations() {
       const index = locations.findIndex((l) => l.id === match[1]);
       if (index < 0) return;
       setActive(index);
-
-      // The hash carries state, not an element id, so the browser has nothing
-      // to scroll to on its own — a shared link would otherwise drop the
-      // visitor at the top of the page with the section far below.
-      // `instant`, not `smooth`: this matches what a real fragment link does
-      // (jump, not glide), and `auto` would inherit scroll-behavior: smooth
-      // from the stylesheet.
-      sectionRef.current?.scrollIntoView({ behavior: "instant", block: "start" });
     };
     sync();
     window.addEventListener("hashchange", sync);
@@ -136,7 +127,21 @@ export function Locations() {
   const current = locations[active];
 
   return (
-    <section id="locations" ref={sectionRef} className="relative bg-ink text-paper">
+    <section id="locations" className="relative bg-ink text-paper">
+      {/* Real fragment targets. The browser scrolls to a fragment only when an
+          element with that id exists in the DOM — a JS scrollIntoView from an
+          effect races with the router's own scroll handling and loses. With
+          real anchors the platform does the jump itself, and `scroll-margin-top`
+          keeps the heading clear of the fixed header. */}
+      <div aria-hidden="true">
+        {locations.map((loc) => (
+          <span
+            key={loc.id}
+            id={`loc-${loc.id}`}
+            className="pointer-events-none absolute top-0 block h-px w-px"
+          />
+        ))}
+      </div>
       <div className="mx-auto max-w-[1440px] pad-x py-20 lg:py-32">
         <div data-reveal>
           <Eyebrow index="02">Локации и цены</Eyebrow>

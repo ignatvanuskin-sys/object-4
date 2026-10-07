@@ -10,14 +10,16 @@ for (const s of scripts) {
 }
 
 console.log("chunks:", scripts.length, "| bytes:", bundle.length);
-console.log("scrollIntoView present:", bundle.includes("scrollIntoView"));
-console.log("'#loc-' string present:", bundle.includes("#loc-"));
-console.log("prefers-reduced-motion in bundle:", bundle.includes("prefers-reduced-motion"));
+console.log('behavior:"instant" present:', /behavior:"instant"/.test(bundle) || bundle.includes('"instant"'));
+console.log('behavior:"smooth" in MY code (loc-related):', /sectionRef/.test(bundle));
+console.log("scrollIntoView call sites:", (bundle.match(/scrollIntoView/g) || []).length);
+console.log("'#loc-' string:", bundle.includes("#loc-"));
 
-const i = bundle.indexOf("scrollIntoView");
-if (i > -1) {
-  console.log("\ncontext:");
-  console.log(bundle.slice(Math.max(0, i - 220), i + 120));
-} else {
-  console.log("\nNOT FOUND — the deployed bundle predates the fix, or the code was dropped.");
+// Show the context around each call that looks like ours (options object).
+const idx = [...bundle.matchAll(/scrollIntoView\(/g)].map((m) => m.index);
+for (const i of idx) {
+  const ctx = bundle.slice(i, i + 90);
+  if (ctx.includes("behavior") || ctx.includes("block")) {
+    console.log("\nOUR CALL SITE:", ctx.replace(/\s+/g, " "));
+  }
 }
