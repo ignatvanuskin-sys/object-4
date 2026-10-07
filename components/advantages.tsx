@@ -75,7 +75,7 @@ export function Advantages() {
                     {a.text}
                   </p>
                   {a.source ? (
-                    <p className="label mt-3 text-paper/50">Источник: {a.source}</p>
+                    <p className="label mt-3 text-paper/65">Источник: {a.source}</p>
                   ) : null}
                 </div>
               </li>

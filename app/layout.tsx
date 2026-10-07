@@ -5,6 +5,7 @@ import { RevealManager } from "@/components/reveal-manager";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { site } from "@/lib/site";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 /**
@@ -26,12 +27,9 @@ const inter = Inter({
   display: "swap",
 });
 
-/** Set NEXT_PUBLIC_SITE_URL in the hosting environment (see .env.example). */
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-
-const title = `${site.mark} ${site.markIndex} — хоррор-квест в ${site.city}, ${site.region}`;
+const title = `${site.mark} ${site.markIndex} — хоррор-квест в ${site.cityIn}, ${site.region}`;
 const description =
-  `Хоррор-квест с живыми актёрами в ${site.city}. Две локации: «Дом проклятых» на 2–8 человек ` +
+  `Хоррор-квест с живыми актёрами в ${site.cityIn}. Две локации: «Дом проклятых» на 2–8 человек ` +
   `и «Пила» — одна команда до 10. Оценка ${site.rating} в 2ГИС при ${site.ratingsCount} оценках. ` +
   `Запись ежедневно ${site.hoursShort} — телефон, WhatsApp или заявка.`;
 
@@ -65,7 +63,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: `${site.mark} ${site.markIndex} — хоррор-квест в ${site.city}`,
+        alt: `${site.mark} ${site.markIndex} — хоррор-квест в ${site.cityIn}`,
       },
     ],
   },

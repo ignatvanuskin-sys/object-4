@@ -52,7 +52,7 @@ function PriceTable({ loc }: { loc: Location }) {
 function LocationDetail({ loc }: { loc: Location }) {
   return (
     <div className="grid gap-6 lg:gap-8">
-      <p className="measure text-[0.9375rem] leading-relaxed text-paper/70">{loc.lead}</p>
+      <p className="measure text-[0.9375rem] leading-relaxed text-paper/85">{loc.lead}</p>
 
       <dl className="grid grid-cols-1 gap-px overflow-hidden border-y border-white/12 sm:grid-cols-3">
         {loc.facts.map((f) => (
@@ -204,7 +204,7 @@ export function Locations() {
                           className={`shrink-0 transition-[transform,color] duration-400 ${
                             isActive
                               ? "translate-x-0 text-ember"
-                              : "-translate-x-2 text-paper/50 group-hover:translate-x-0 group-hover:text-paper"
+                              : "-translate-x-2 text-paper/65 group-hover:translate-x-0 group-hover:text-paper"
                           }`}
                         />
                       </button>
@@ -228,7 +228,7 @@ export function Locations() {
                 href={site.twoGisGallery}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="wipe text-paper/70"
+                className="wipe text-paper/85"
               >
                 фотоальбоме на 2ГИС
               </a>

@@ -43,7 +43,7 @@ export function About() {
                 data-reveal
                 style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
               >
-                {site.mark} {site.markIndex} — хоррор-квест в {site.city}, {site.region}. Две локации:
+                {site.mark} {site.markIndex} — хоррор-квест в {site.cityIn}, {site.region}. Две локации:
                 «Дом проклятых» на 2–8 человек и «Пила» — одна команда до десяти. Внутри работают
                 живые актёры: в отзывах на 2ГИС гости называют их по именам и отдельно благодарят
                 администраторов.

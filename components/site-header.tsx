@@ -65,7 +65,7 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="label wipe text-paper/65 transition-colors duration-300 hover:text-paper"
+                className="label wipe inline-flex min-h-11 items-center inline-flex min-h-11 items-center text-paper/65 transition-colors duration-300 hover:text-paper"
               >
                 {item.label}
               </Link>
@@ -75,7 +75,7 @@ export function SiteHeader() {
           <div className="flex items-center gap-3 sm:gap-4">
             <a
               href={site.phoneHref}
-              className="label hidden text-paper/70 transition-colors duration-300 hover:text-paper md:inline-block"
+              className="label hidden min-h-11 items-center text-paper/85 transition-colors duration-300 hover:text-paper md:inline-flex"
             >
               {site.phoneLabel}
             </a>
@@ -92,7 +92,7 @@ export function SiteHeader() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Закрыть меню" : "Открыть меню"}
-              className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] lg:hidden"
+              className="flex h-11 min-h-11 w-11 min-w-11 flex-col items-center justify-center gap-[5px] lg:hidden"
             >
               <span
                 className={`block h-px w-6 bg-paper transition-transform duration-300 ${

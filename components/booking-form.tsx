@@ -1,12 +1,17 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { site } from "@/lib/site";
 
 type Status = "idle" | "sending" | "sent" | "error";
+type FieldName = "name" | "phone";
 
-const field =
-  "w-full border-b border-white/20 bg-transparent py-4 text-[1rem] text-paper placeholder:text-paper/50 transition-colors duration-300 hover:border-white/40 focus:border-signal focus:outline-none";
+const fieldBase =
+  "w-full border-b bg-transparent py-4 text-[1rem] text-paper placeholder:text-paper/65 transition-colors duration-300 focus:outline-none";
+
+/** The invalid state has to be visible, not just announced. */
+const fieldCls = (bad = false) =>
+  `${fieldBase} ${bad ? "border-ember" : "border-white/20 hover:border-white/40 focus:border-signal"}`;
 
 const labelCls = "label block text-paper/55";
 
@@ -20,6 +25,9 @@ const labelCls = "label block text-paper/55";
 export function BookingForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [invalid, setInvalid] = useState<FieldName | null>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -35,13 +43,17 @@ export function BookingForm() {
 
     if (payload.name.length < 2) {
       setStatus("error");
+      setInvalid("name");
       setError("Укажите имя — как к вам обращаться.");
+      nameRef.current?.focus();
       return;
     }
     const digits = payload.phone.replace(/\D/g, "");
     if (digits.length < 10) {
       setStatus("error");
+      setInvalid("phone");
       setError("Проверьте номер телефона: нужно не меньше 10 цифр.");
+      phoneRef.current?.focus();
       return;
     }
     if (payload.trap) {
@@ -51,6 +63,7 @@ export function BookingForm() {
 
     setStatus("sending");
     setError(null);
+    setInvalid(null);
 
     try {
       const res = await fetch("/api/booking", {
@@ -107,7 +120,7 @@ export function BookingForm() {
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="label wipe mt-6 text-paper/55"
+          className="label wipe inline-flex min-h-11 items-center mt-6 text-paper/55"
         >
           Отправить ещё одну заявку
         </button>
@@ -125,14 +138,16 @@ export function BookingForm() {
             Имя
           </label>
           <input
+            ref={nameRef}
             id="bf-name"
             name="name"
             type="text"
             required
             autoComplete="name"
             placeholder="Как к вам обращаться"
-            className={field}
-            aria-describedby={error ? "bf-error" : undefined}
+            className={fieldCls(invalid === "name")}
+            aria-invalid={invalid === "name"}
+            aria-describedby={invalid === "name" ? "bf-error" : undefined}
           />
         </div>
 
@@ -141,6 +156,7 @@ export function BookingForm() {
             Телефон
           </label>
           <input
+            ref={phoneRef}
             id="bf-phone"
             name="phone"
             type="tel"
@@ -148,8 +164,9 @@ export function BookingForm() {
             autoComplete="tel"
             inputMode="tel"
             placeholder="+7 ___ ___ __ __"
-            className={field}
-            aria-describedby={error ? "bf-error" : undefined}
+            className={fieldCls(invalid === "phone")}
+            aria-invalid={invalid === "phone"}
+            aria-describedby={invalid === "phone" ? "bf-error" : undefined}
           />
         </div>
 
@@ -162,7 +179,7 @@ export function BookingForm() {
             name="comment"
             rows={3}
             placeholder="Дата, время, локация и количество человек"
-            className={`${field} resize-none`}
+            className={`${fieldCls()} resize-none`}
           />
         </div>
 

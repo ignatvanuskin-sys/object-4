@@ -1,9 +1,15 @@
 import { Eyebrow } from "@/components/ui";
 import { featuredReview, reviews, site } from "@/lib/site";
 
+// role="img" is required here: aria-label on a bare span is a prohibited
+// attribute, and axe flagged all 8 rating blocks for exactly that.
 function Stars({ className = "" }: { className?: string }) {
   return (
-    <span className={`flex items-center gap-1 ${className}`} aria-label="Оценка 5 из 5">
+    <span
+      role="img"
+      className={`flex items-center gap-1 ${className}`}
+      aria-label="Оценка 5 из 5"
+    >
       {Array.from({ length: 5 }).map((_, i) => (
         <svg key={i} viewBox="0 0 12 12" className="h-3 w-3 fill-ember" aria-hidden="true">
           <path d="M6 0l1.6 3.9 4.2.35-3.2 2.8.98 4.1L6 9.02 2.42 11.15l.98-4.1-3.2-2.8 4.2-.35z" />
@@ -38,12 +44,12 @@ export function Reviews() {
                 {site.ratingsCount} оценок и {site.reviewsCount} отзывов на 2ГИС. Каждый отзыв ниже
                 помечен сервисом как подтверждённый посещением, оплатой или бронью.
               </p>
-              <p className="label mt-5 text-paper/50">Источник — 2ГИС</p>
+              <p className="label mt-5 text-paper/65">Источник — 2ГИС</p>
               <a
                 href={site.twoGisReviews}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="label wipe mt-6 inline-block text-paper"
+                className="label wipe inline-flex min-h-11 items-center mt-6 inline-flex min-h-11 items-center text-paper"
               >
                 Читать все {site.reviewsCount} отзывов →
               </a>
@@ -82,15 +88,15 @@ export function Reviews() {
                   <p className="text-[0.9375rem] leading-relaxed text-paper/65">«{r.text}»</p>
                   <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
                     <span className="text-[0.875rem] text-paper">{r.author}</span>
-                    <span className="label text-paper/50">{r.date}</span>
-                    {r.visits ? <span className="label text-paper/50">· {r.visits}</span> : null}
+                    <span className="label text-paper/65">{r.date}</span>
+                    {r.visits ? <span className="label text-paper/65">· {r.visits}</span> : null}
                     {r.meta ? <span className="label text-ember">{r.meta}</span> : null}
                   </p>
                 </li>
               ))}
             </ul>
 
-            <p className="label mt-8 text-paper/50">
+            <p className="label mt-8 text-paper/65">
               Тексты и имена авторов приведены без правок. Отзывы с оскорблениями и без текста в
               выборку не включены.
             </p>

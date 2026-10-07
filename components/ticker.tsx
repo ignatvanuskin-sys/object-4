@@ -24,7 +24,7 @@ export function Ticker() {
     >
       <div className="ticker-track flex w-max items-center gap-10 whitespace-nowrap">
         {row.map((item, i) => (
-          <span key={i} className="label flex items-center gap-10 text-paper/50">
+          <span key={i} className="label flex items-center gap-10 text-paper/65">
             {item}
             <span className="inline-block h-1 w-1 bg-signal" />
           </span>

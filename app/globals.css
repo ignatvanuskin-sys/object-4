@@ -87,7 +87,9 @@ body {
 }
 
 .label {
-  font-size: 0.6875rem;
+  /* 12px, not 11: the uppercase tracking already costs legibility, and 11px
+     was flagged as below a comfortable mobile minimum. */
+  font-size: 0.75rem;
   line-height: 1.2;
   letter-spacing: 0.17em;
   text-transform: uppercase;

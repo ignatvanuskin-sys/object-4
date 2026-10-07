@@ -47,7 +47,7 @@ export function Faq() {
                   href={site.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="label wipe self-start text-paper/65"
+                  className="label wipe inline-flex min-h-11 items-center self-start text-paper/65"
                 >
                   Написать в WhatsApp →
                 </a>
@@ -72,7 +72,7 @@ export function Faq() {
                       >
                         <span
                           className={`label num w-6 shrink-0 transition-colors duration-300 ${
-                            isOpen ? "text-ember" : "text-paper/50"
+                            isOpen ? "text-ember" : "text-paper/65"
                           }`}
                         >
                           {String(i + 1).padStart(2, "0")}

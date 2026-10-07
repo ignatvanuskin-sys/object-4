@@ -40,8 +40,10 @@ export function Hero() {
         className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/55"
         aria-hidden="true"
       />
+      {/* Stronger scrim on the text side: the second half of the H1 sits on a
+          busy, bright part of the photograph. */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-ink via-ink/35 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-ink via-ink/60 to-transparent"
         aria-hidden="true"
       />
       <div className="grain absolute inset-0" aria-hidden="true" />
@@ -69,11 +71,11 @@ export function Hero() {
           >
             Вход добровольный.
             <br />
-            <span className="text-paper/55">Выход — по правилам объекта.</span>
+            <span className="text-paper/75">Выход — по правилам объекта.</span>
           </h1>
 
           <p
-            className="measure mt-7 text-[1.0625rem] leading-relaxed text-paper/70 lg:text-[1.125rem]"
+            className="measure mt-7 text-[1.0625rem] leading-relaxed text-paper/85 lg:text-[1.125rem]"
             data-reveal
             style={{ "--reveal-delay": "170ms" } as React.CSSProperties}
           >
@@ -107,7 +109,7 @@ export function Hero() {
         className="pointer-events-none absolute right-8 bottom-40 z-10 hidden flex-col items-center gap-4 lg:flex xl:right-12"
         aria-hidden="true"
       >
-        <span className="label [writing-mode:vertical-rl] text-paper/55">Листать</span>
+        <span className="label [writing-mode:vertical-rl] text-paper/70">Листать</span>
         <span className="block h-20 w-px bg-gradient-to-b from-white/40 to-transparent" />
       </div>
 
@@ -121,14 +123,16 @@ export function Hero() {
               } ${i < 2 ? "border-b lg:border-b-0" : ""} ${i === 2 ? "lg:border-r" : ""}`}
             >
               <dt className="label text-paper/55">{item.label}</dt>
-              <dd className="mt-2 truncate text-[0.9375rem] text-paper/90">
+              {/* No `truncate`: at 320px it cut the address down to
+                  "Рудный, Район Авто…". The cell wraps instead. */}
+              <dd className="mt-2 text-[0.9375rem] leading-snug text-paper/90">
                 {item.href ? (
                   <a
                     href={item.href}
                     {...(item.href.startsWith("http")
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className="wipe"
+                    className="wipe inline-flex min-h-11 items-center "
                   >
                     {item.value}
                   </a>

@@ -12,7 +12,7 @@ export function SiteFooter() {
               <span className="num text-[1.25rem] text-ember">{site.markIndex}</span>
             </p>
             <p className="measure mt-5 text-[0.9375rem] leading-relaxed text-paper/55">
-              {site.tagline} в {site.city}, {site.region}. Две локации — «Дом проклятых» и «Пила».
+              {site.tagline} в {site.cityIn}, {site.region}. Две локации — «Дом проклятых» и «Пила».
             </p>
             <a
               href={site.whatsapp}
@@ -29,7 +29,7 @@ export function SiteFooter() {
             <ul className="mt-5 space-y-3">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="wipe text-[0.9375rem] text-paper/75">
+                  <Link href={item.href} className="wipe inline-flex min-h-11 items-center text-[0.9375rem] text-paper/75">
                     {item.label}
                   </Link>
                 </li>
@@ -41,7 +41,7 @@ export function SiteFooter() {
             <p className="label text-paper/55">Контакты</p>
             <ul className="mt-5 space-y-4">
               <li>
-                <a href={site.phoneHref} className="wipe text-[0.9375rem] text-paper/90">
+                <a href={site.phoneHref} className="wipe inline-flex min-h-11 items-center text-[0.9375rem] text-paper/90">
                   {site.phoneLabel}
                 </a>
               </li>
@@ -50,7 +50,7 @@ export function SiteFooter() {
                   href={site.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="wipe text-[0.9375rem] text-paper/75"
+                  className="wipe inline-flex min-h-11 items-center text-[0.9375rem] text-paper/75"
                 >
                   {site.instagramHandle}
                 </a>
@@ -60,7 +60,7 @@ export function SiteFooter() {
                   href={site.twoGisCard}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="wipe text-[0.9375rem] text-paper/75"
+                  className="wipe inline-flex min-h-11 items-center text-[0.9375rem] text-paper/75"
                 >
                   2ГИС · {site.rating}
                 </a>

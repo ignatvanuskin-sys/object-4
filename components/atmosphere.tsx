@@ -144,7 +144,7 @@ export function Atmosphere() {
             href={site.twoGisGallery}
             target="_blank"
             rel="noopener noreferrer"
-            className="label wipe self-start text-paper sm:self-auto"
+            className="label wipe inline-flex min-h-11 items-center self-start text-paper sm:self-auto"
           >
             Смотреть весь альбом на 2ГИС →
           </a>

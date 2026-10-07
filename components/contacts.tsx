@@ -88,7 +88,7 @@ export function Contacts() {
                   href={l.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="label wipe text-paper/70"
+                  className="label wipe inline-flex min-h-11 items-center text-paper/85"
                 >
                   {l.label} →
                 </a>

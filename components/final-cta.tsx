@@ -36,7 +36,7 @@ export function FinalCta() {
           </h2>
 
           <p
-            className="measure mt-7 text-[1.0625rem] leading-relaxed text-paper/70"
+            className="measure mt-7 text-[1.0625rem] leading-relaxed text-paper/85"
             data-reveal
             style={{ "--reveal-delay": "140ms" } as React.CSSProperties}
           >

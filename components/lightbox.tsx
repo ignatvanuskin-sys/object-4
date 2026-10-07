@@ -65,7 +65,7 @@ export function Lightbox({
               ref={closeRef}
               type="button"
               onClick={() => setOpen(false)}
-              className="label flex min-h-[44px] items-center gap-2 px-2 text-paper/70 transition-colors hover:text-paper"
+              className="label flex min-h-[44px] items-center gap-2 px-2 text-paper/85 transition-colors hover:text-paper"
             >
               Закрыть
               <span aria-hidden="true" className="text-lg leading-none">
@@ -83,7 +83,7 @@ export function Lightbox({
               className="mx-auto h-auto w-full max-w-[640px] object-contain"
             />
             {caption ? (
-              <p className="measure mx-auto mt-5 text-[0.875rem] leading-relaxed text-paper/50">
+              <p className="measure mx-auto mt-5 text-[0.875rem] leading-relaxed text-paper/65">
                 {caption}
               </p>
             ) : null}
