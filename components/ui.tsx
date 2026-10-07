@@ -1,26 +1,25 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-/** Micro technical label: `[ 02 ] ЛОКАЦИИ` with a hairline running to the edge. */
+/**
+ * Micro technical label: `[ 02 ] ЛОКАЦИИ` with a hairline running to the edge.
+ * Every section is dark now, so there is no light/dark variant any more.
+ */
 export function Eyebrow({
   index,
   children,
-  tone = "dark",
   className = "",
 }: {
   index?: string;
   children: ReactNode;
-  tone?: "dark" | "light";
   className?: string;
 }) {
-  const line = tone === "dark" ? "bg-white/15" : "bg-ink/15";
-  const dim = tone === "dark" ? "text-white/45" : "text-ink/45";
   return (
     <div className={`flex items-baseline gap-4 ${className}`}>
-      <span className={`label ${dim} shrink-0`}>
+      <span className="label shrink-0 text-paper/55">
         {index ? `[ ${index} ]` : null} {children}
       </span>
-      <span className={`h-px flex-1 ${line}`} aria-hidden="true" />
+      <span className="h-px flex-1 bg-white/12" aria-hidden="true" />
     </div>
   );
 }
@@ -28,7 +27,7 @@ export function Eyebrow({
 type ButtonProps = {
   href: string;
   children: ReactNode;
-  variant?: "solid" | "outline" | "light" | "ghost";
+  variant?: "solid" | "outline" | "invert" | "quiet";
   className?: string;
   ariaLabel?: string;
   external?: boolean;
@@ -39,9 +38,9 @@ const base =
 
 const variants: Record<string, string> = {
   solid: "bg-signal text-white hover:bg-signal-deep",
-  outline: "border border-white/25 text-paper hover:border-transparent hover:bg-paper hover:text-ink",
-  light: "bg-ink text-paper hover:bg-signal",
-  ghost: "border border-ink/20 text-ink hover:border-ink hover:bg-ink hover:text-paper",
+  outline: "border border-white/25 text-paper hover:border-paper hover:bg-paper hover:text-ink",
+  invert: "bg-paper text-ink hover:bg-signal hover:text-white",
+  quiet: "border border-white/15 text-paper/80 hover:border-paper hover:text-paper",
 };
 
 /** Buttons are links by design: the two conversions are call and WhatsApp. */
@@ -56,13 +55,7 @@ export function ActionLink({
   const cls = `${base} ${variants[variant]} ${className}`;
   if (external) {
     return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={cls}
-        aria-label={ariaLabel}
-      >
+      <a href={href} target="_blank" rel="noopener noreferrer" className={cls} aria-label={ariaLabel}>
         {children}
       </a>
     );

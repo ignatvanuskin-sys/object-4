@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Oswald } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { MobileCta } from "@/components/mobile-cta";
 import { RevealManager } from "@/components/reveal-manager";
 import { SiteFooter } from "@/components/site-footer";
@@ -7,11 +7,17 @@ import { SiteHeader } from "@/components/site-header";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const oswald = Oswald({
+/**
+ * Display: Playfair Display — a high-contrast Didone with a full Cyrillic
+ * subset. It replaces the condensed grotesque that made every headline read
+ * like a template; at poster sizes on black it carries the horror/editorial
+ * tone on its own. Body/UI stays Inter, which has reliable tabular figures for
+ * the price grids.
+ */
+const playfair = Playfair_Display({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-oswald",
+  variable: "--font-playfair",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
 const inter = Inter({
@@ -146,7 +152,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className={`${oswald.variable} ${inter.variable}`}>
+    <html lang="ru" className={`${playfair.variable} ${inter.variable}`}>
       <body className="antialiased">
         <a
           href="#main"

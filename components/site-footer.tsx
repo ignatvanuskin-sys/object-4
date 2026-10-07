@@ -9,7 +9,7 @@ export function SiteFooter() {
           <div className="lg:col-span-5">
             <p className="flex items-baseline gap-2">
               <span className="display text-[2rem] text-paper">{site.mark}</span>
-              <span className="num text-[1.25rem] text-signal">{site.markIndex}</span>
+              <span className="num text-[1.25rem] text-ember">{site.markIndex}</span>
             </p>
             <p className="measure mt-5 text-[0.9375rem] leading-relaxed text-paper/55">
               {site.tagline} в {site.city}, {site.region}. Две локации — «Дом проклятых» и «Пила».
@@ -25,7 +25,7 @@ export function SiteFooter() {
           </div>
 
           <nav aria-label="Навигация в подвале" className="lg:col-span-3">
-            <p className="label text-paper/35">Разделы</p>
+            <p className="label text-paper/55">Разделы</p>
             <ul className="mt-5 space-y-3">
               {navItems.map((item) => (
                 <li key={item.href}>
@@ -38,7 +38,7 @@ export function SiteFooter() {
           </nav>
 
           <div className="lg:col-span-3 lg:col-start-10">
-            <p className="label text-paper/35">Контакты</p>
+            <p className="label text-paper/55">Контакты</p>
             <ul className="mt-5 space-y-4">
               <li>
                 <a href={site.phoneHref} className="wipe text-[0.9375rem] text-paper/90">
@@ -74,17 +74,17 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-14 border-t border-white/10 pt-8">
-          <p className="text-[0.75rem] leading-relaxed text-paper/40">
+          <p className="text-[0.75rem] leading-relaxed text-paper/55">
             Рейтинг, отзывы, адрес, режим работы, способы оплаты, прайс-листы и фотографии взяты из
             открытой карточки компании на 2ГИС. Стоимость указана по опубликованным прайс-листам и
             не является публичной офертой: итоговую сумму для конкретного состава подтверждает
             администратор. Ссылки на Instagram — на официальный аккаунт {site.instagramHandle}.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="label text-paper/35">
+            <p className="label text-paper/55">
               © {year} {site.mark} {site.markIndex} · {site.city}
             </p>
-            <p className="label text-paper/35">Запись ежедневно {site.hoursShort}</p>
+            <p className="label text-paper/55">Запись ежедневно {site.hoursShort}</p>
           </div>
         </div>
       </div>

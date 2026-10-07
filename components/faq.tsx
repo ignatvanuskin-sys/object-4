@@ -8,10 +8,10 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="bg-paper text-ink">
+    <section id="faq" className="bg-shale text-paper">
       <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
         <div data-reveal>
-          <Eyebrow index="07" tone="light">
+          <Eyebrow index="07">
             Что обычно спрашивают
           </Eyebrow>
         </div>
@@ -20,13 +20,13 @@ export function Faq() {
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
               <h2
-                className="display text-[clamp(1.75rem,3.6vw,2.75rem)] text-ink"
+                className="display text-[clamp(1.75rem,3.6vw,2.75rem)] text-paper"
                 data-reveal
               >
                 Отвечаем прямо. Где данных нет — так и говорим.
               </h2>
               <p
-                className="measure mt-6 text-[0.9375rem] leading-relaxed text-graphite"
+                className="measure mt-6 text-[0.9375rem] leading-relaxed text-paper/65"
                 data-reveal
                 style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
               >
@@ -36,18 +36,18 @@ export function Faq() {
               </p>
 
               <div
-                className="mt-8 flex flex-col gap-3 border-t border-ink/15 pt-8"
+                className="mt-8 flex flex-col gap-3 border-t border-white/12 pt-8"
                 data-reveal
                 style={{ "--reveal-delay": "140ms" } as React.CSSProperties}
               >
-                <a href={site.phoneHref} className="display text-[1.5rem] text-ink">
+                <a href={site.phoneHref} className="display text-[1.5rem] text-paper">
                   {site.phoneLabel}
                 </a>
                 <a
                   href={site.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="label wipe self-start text-graphite"
+                  className="label wipe self-start text-paper/65"
                 >
                   Написать в WhatsApp →
                 </a>
@@ -60,7 +60,7 @@ export function Faq() {
               {faq.map((item, i) => {
                 const isOpen = open === i;
                 return (
-                  <li key={item.q} className="border-t border-ink/15 last:border-b">
+                  <li key={item.q} className="border-t border-white/12 last:border-b">
                     <h3>
                       <button
                         type="button"
@@ -72,12 +72,12 @@ export function Faq() {
                       >
                         <span
                           className={`label num w-6 shrink-0 transition-colors duration-300 ${
-                            isOpen ? "text-signal" : "text-ink/35"
+                            isOpen ? "text-ember" : "text-paper/50"
                           }`}
                         >
                           {String(i + 1).padStart(2, "0")}
                         </span>
-                        <span className="flex-1 text-[1.0625rem] leading-snug text-ink">
+                        <span className="flex-1 text-[1.0625rem] leading-snug text-paper">
                           {item.q}
                         </span>
                         <span
@@ -86,8 +86,8 @@ export function Faq() {
                             isOpen ? "rotate-45" : ""
                           }`}
                         >
-                          <span className="absolute top-1/2 left-0 h-px w-3 -translate-y-1/2 bg-ink" />
-                          <span className="absolute top-0 left-1/2 h-3 w-px -translate-x-1/2 bg-ink" />
+                          <span className="absolute top-1/2 left-0 h-px w-3 -translate-y-1/2 bg-paper" />
+                          <span className="absolute top-0 left-1/2 h-3 w-px -translate-x-1/2 bg-paper" />
                         </span>
                       </button>
                     </h3>
@@ -100,7 +100,7 @@ export function Faq() {
                       }`}
                     >
                       <div className="overflow-hidden">
-                        <p className="measure pr-8 pb-6 pl-11 text-[0.9375rem] leading-relaxed text-graphite">
+                        <p className="measure pr-8 pb-6 pl-11 text-[0.9375rem] leading-relaxed text-paper/65">
                           {item.a}
                         </p>
                       </div>

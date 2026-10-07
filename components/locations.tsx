@@ -18,8 +18,8 @@ function PriceTable({ loc }: { loc: Location }) {
   return (
     <div className="border-t border-white/12">
       <div className="flex items-baseline justify-between py-3">
-        <span className="label text-paper/40">Состав</span>
-        <span className="label text-paper/40">Стоимость</span>
+        <span className="label text-paper/55">Состав</span>
+        <span className="label text-paper/55">Стоимость</span>
       </div>
       <ul>
         {loc.prices.map((row) => {
@@ -57,7 +57,7 @@ function LocationDetail({ loc }: { loc: Location }) {
       <dl className="grid grid-cols-1 gap-px overflow-hidden border-y border-white/12 sm:grid-cols-3">
         {loc.facts.map((f) => (
           <div key={f.label} className="bg-white/[0.02] px-4 py-3.5">
-            <dt className="label text-paper/40">{f.label}</dt>
+            <dt className="label text-paper/55">{f.label}</dt>
             <dd className="mt-1.5 text-[0.875rem] text-paper/90">{f.value}</dd>
           </div>
         ))}
@@ -68,9 +68,9 @@ function LocationDetail({ loc }: { loc: Location }) {
       <div className="grid gap-2">
         <p className="text-[0.8125rem] leading-relaxed text-paper/55">{loc.priceNote}</p>
         {loc.priceCaveat ? (
-          <p className="text-[0.8125rem] leading-relaxed text-signal/80">{loc.priceCaveat}</p>
+          <p className="text-[0.8125rem] leading-relaxed text-ember/80">{loc.priceCaveat}</p>
         ) : null}
-        <p className="text-[0.75rem] leading-relaxed text-paper/35">
+        <p className="text-[0.75rem] leading-relaxed text-paper/55">
           Прайс-лист опубликован компанией на 2ГИС. Итоговую сумму подтверждает администратор.
         </p>
       </div>
@@ -143,7 +143,7 @@ export function Locations() {
                   position="50% 45%"
                 />
               </div>
-              <p className="label mt-6 text-signal">
+              <p className="label mt-6 text-ember">
                 {loc.index} · {loc.kind}
               </p>
               <h3 className="display mt-2 text-[clamp(1.75rem,6vw,2.25rem)] text-paper">
@@ -176,7 +176,7 @@ export function Locations() {
                       >
                         <span
                           className={`label num w-8 shrink-0 transition-colors duration-300 ${
-                            isActive ? "text-signal" : "text-paper/35"
+                            isActive ? "text-ember" : "text-paper/55"
                           }`}
                         >
                           {loc.index}
@@ -190,21 +190,21 @@ export function Locations() {
                           >
                             {loc.name}
                           </span>
-                          <span className="label mt-2 block text-paper/40">
+                          <span className="label mt-2 block text-paper/55">
                             {loc.kind} · {loc.capacity}
                           </span>
                         </span>
 
                         <span className="hidden shrink-0 text-right sm:block">
-                          <span className="label block text-paper/40">от</span>
+                          <span className="label block text-paper/55">от</span>
                           <span className="num block text-[1.0625rem] text-paper">{loc.from}</span>
                         </span>
 
                         <Arrow
                           className={`shrink-0 transition-[transform,color] duration-400 ${
                             isActive
-                              ? "translate-x-0 text-signal"
-                              : "-translate-x-2 text-paper/30 group-hover:translate-x-0 group-hover:text-paper"
+                              ? "translate-x-0 text-ember"
+                              : "-translate-x-2 text-paper/50 group-hover:translate-x-0 group-hover:text-paper"
                           }`}
                         />
                       </button>
@@ -222,7 +222,7 @@ export function Locations() {
               <LocationDetail loc={current} />
             </div>
 
-            <p className="mt-8 text-[0.8125rem] leading-relaxed text-paper/40">
+            <p className="mt-8 text-[0.8125rem] leading-relaxed text-paper/55">
               Все {site.galleryPhotos} фотографий объекта, включая прайс-листы, опубликованы в{" "}
               <a
                 href={site.twoGisGallery}
@@ -260,7 +260,7 @@ export function Locations() {
                   {current.index} · {current.name}
                 </span>
               </div>
-              <p className="label mt-4 text-paper/35">
+              <p className="label mt-4 text-paper/55">
                 Интерьер локации · фото из альбома 2ГИС
               </p>
             </div>

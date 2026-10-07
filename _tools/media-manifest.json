@@ -1,67 +1,67 @@
 {
   "hall": {
-    "color": "#370308",
+    "color": "#44060d",
     "wide": [
       {
         "file": "hall-wide-1600.webp",
         "w": 1600,
         "h": 1000,
-        "bytes": 52818
+        "bytes": 61130
       },
       {
         "file": "hall-wide-1100.webp",
         "w": 1100,
-        "h": 688,
-        "bytes": 31264
+        "h": 687,
+        "bytes": 39044
       },
       {
         "file": "hall-wide-700.webp",
         "w": 700,
-        "h": 438,
-        "bytes": 16540
+        "h": 437,
+        "bytes": 20908
       }
     ],
     "tall": [
       {
         "file": "hall-tall-1200.webp",
         "w": 1200,
-        "h": 1600,
-        "bytes": 46662
+        "h": 1601,
+        "bytes": 54940
       },
       {
         "file": "hall-tall-800.webp",
         "w": 800,
         "h": 1067,
-        "bytes": 26618
+        "bytes": 34098
       },
       {
         "file": "hall-tall-500.webp",
         "w": 500,
         "h": 667,
-        "bytes": 13184
+        "bytes": 19370
       }
     ]
   },
   "stairs": {
-    "color": "#1a1614",
+    "color": "#3f3733",
     "wide": [
       {
         "file": "stairs-wide-1600.webp",
         "w": 1600,
         "h": 1000,
-        "bytes": 19214
+        "bytes": 30362
       },
       {
         "file": "stairs-wide-1100.webp",
         "w": 1100,
-        "h": 688,
-        "bytes": 10736
+        "h": 687,
+        "bytes": 16336
       },
       {
         "file": "stairs-wide-700.webp",
         "w": 700,
-        "h": 438,
-        "bytes": 5774
+        "h": 437,
+        "bytes": 8462
       }
     ],
     "tall": [
@@ -69,85 +69,42 @@
         "file": "stairs-tall-1200.webp",
         "w": 1200,
         "h": 1600,
-        "bytes": 33708
+        "bytes": 29414
       },
       {
         "file": "stairs-tall-800.webp",
         "w": 800,
         "h": 1067,
-        "bytes": 19436
+        "bytes": 16306
       },
       {
         "file": "stairs-tall-500.webp",
         "w": 500,
         "h": 667,
-        "bytes": 10122
-      }
-    ]
-  },
-  "corridor": {
-    "color": "#252320",
-    "wide": [
-      {
-        "file": "corridor-wide-1600.webp",
-        "w": 1600,
-        "h": 1000,
-        "bytes": 29002
-      },
-      {
-        "file": "corridor-wide-1100.webp",
-        "w": 1100,
-        "h": 688,
-        "bytes": 17212
-      },
-      {
-        "file": "corridor-wide-700.webp",
-        "w": 700,
-        "h": 438,
-        "bytes": 8968
-      }
-    ],
-    "tall": [
-      {
-        "file": "corridor-tall-1200.webp",
-        "w": 1200,
-        "h": 1600,
-        "bytes": 51916
-      },
-      {
-        "file": "corridor-tall-800.webp",
-        "w": 800,
-        "h": 1067,
-        "bytes": 30282
-      },
-      {
-        "file": "corridor-tall-500.webp",
-        "w": 500,
-        "h": 667,
-        "bytes": 16172
+        "bytes": 8270
       }
     ]
   },
   "mask": {
-    "color": "#181820",
+    "color": "#2f2f44",
     "wide": [
       {
         "file": "mask-wide-1600.webp",
         "w": 1600,
         "h": 1000,
-        "bytes": 26976
+        "bytes": 37080
       },
       {
         "file": "mask-wide-1100.webp",
         "w": 1100,
-        "h": 688,
-        "bytes": 15818
+        "h": 687,
+        "bytes": 21934
       },
       {
         "file": "mask-wide-700.webp",
         "w": 700,
-        "h": 438,
-        "bytes": 8572
+        "h": 437,
+        "bytes": 11710
       }
     ],
     "tall": [
@@ -155,42 +112,42 @@
         "file": "mask-tall-1200.webp",
         "w": 1200,
         "h": 1600,
-        "bytes": 45736
+        "bytes": 40898
       },
       {
         "file": "mask-tall-800.webp",
         "w": 800,
         "h": 1067,
-        "bytes": 27010
+        "bytes": 23060
       },
       {
         "file": "mask-tall-500.webp",
         "w": 500,
         "h": 667,
-        "bytes": 15300
+        "bytes": 12778
       }
     ]
   },
   "posters": {
-    "color": "#272321",
+    "color": "#3b3332",
     "wide": [
       {
         "file": "posters-wide-1600.webp",
         "w": 1600,
         "h": 1000,
-        "bytes": 35420
+        "bytes": 53888
       },
       {
         "file": "posters-wide-1100.webp",
         "w": 1100,
         "h": 688,
-        "bytes": 20410
+        "bytes": 30360
       },
       {
         "file": "posters-wide-700.webp",
         "w": 700,
         "h": 438,
-        "bytes": 10764
+        "bytes": 15692
       }
     ],
     "tall": [
@@ -198,124 +155,124 @@
         "file": "posters-tall-1200.webp",
         "w": 1200,
         "h": 1600,
-        "bytes": 70190
+        "bytes": 63948
       },
       {
         "file": "posters-tall-800.webp",
         "w": 800,
         "h": 1067,
-        "bytes": 37450
+        "bytes": 33018
       },
       {
         "file": "posters-tall-500.webp",
         "w": 500,
         "h": 667,
-        "bytes": 19610
+        "bytes": 17214
       }
     ]
   },
   "hero": {
-    "color": "#320208",
+    "color": "#48060e",
     "wide": [
       {
         "file": "hero-wide-1920.webp",
         "w": 1920,
         "h": 1080,
-        "bytes": 56926
+        "bytes": 70816
       },
       {
         "file": "hero-wide-1280.webp",
         "w": 1280,
         "h": 720,
-        "bytes": 31806
+        "bytes": 44450
       },
       {
         "file": "hero-wide-820.webp",
         "w": 820,
         "h": 461,
-        "bytes": 17762
+        "bytes": 24930
       }
     ],
     "tall": [
       {
         "file": "hero-tall-1200.webp",
         "w": 1200,
-        "h": 1680,
-        "bytes": 44722
+        "h": 1681,
+        "bytes": 54458
       },
       {
         "file": "hero-tall-760.webp",
         "w": 760,
-        "h": 1064,
-        "bytes": 24578
+        "h": 1065,
+        "bytes": 32688
       }
     ]
   },
   "about": {
-    "color": "#322b27",
+    "color": "#36302c",
     "tall": [
       {
         "file": "about-tall-1100.webp",
         "w": 1100,
         "h": 1375,
-        "bytes": 28432
+        "bytes": 24886
       },
       {
         "file": "about-tall-700.webp",
         "w": 700,
         "h": 875,
-        "bytes": 14780
+        "bytes": 12894
       }
     ]
   },
-  "price-dom": {
-    "color": "#b48c69",
+  "priceDom": {
+    "color": "#b18c69",
     "tall": [
       {
-        "file": "price-dom-1200.webp",
+        "file": "priceDom-1200.webp",
         "w": 1200,
-        "h": 2133,
-        "bytes": 264512
+        "h": 2181,
+        "bytes": 250854
       },
       {
-        "file": "price-dom-700.webp",
+        "file": "priceDom-700.webp",
         "w": 700,
-        "h": 1244,
-        "bytes": 152160
+        "h": 1272,
+        "bytes": 139352
       }
     ]
   },
-  "price-pila-a": {
-    "color": "#a58060",
+  "pricePilaA": {
+    "color": "#9f7e5f",
     "tall": [
       {
-        "file": "price-pila-a-1200.webp",
+        "file": "pricePilaA-1200.webp",
         "w": 1200,
-        "h": 2133,
-        "bytes": 269098
+        "h": 2181,
+        "bytes": 252414
       },
       {
-        "file": "price-pila-a-700.webp",
+        "file": "pricePilaA-700.webp",
         "w": 700,
-        "h": 1244,
-        "bytes": 153982
+        "h": 1272,
+        "bytes": 143070
       }
     ]
   },
-  "price-pila-b": {
-    "color": "#a88262",
+  "pricePilaB": {
+    "color": "#a28060",
     "tall": [
       {
-        "file": "price-pila-b-1200.webp",
+        "file": "pricePilaB-1200.webp",
         "w": 1200,
-        "h": 2133,
-        "bytes": 268298
+        "h": 2181,
+        "bytes": 251998
       },
       {
-        "file": "price-pila-b-700.webp",
+        "file": "pricePilaB-700.webp",
         "w": 700,
-        "h": 1244,
-        "bytes": 154944
+        "h": 1272,
+        "bytes": 144026
       }
     ]
   }

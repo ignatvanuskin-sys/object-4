@@ -45,6 +45,7 @@ export function Hero() {
         aria-hidden="true"
       />
       <div className="grain absolute inset-0" aria-hidden="true" />
+      <div className="vignette absolute inset-0" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1440px] flex-col px-5 pt-24 sm:px-8 lg:px-12 lg:pt-32">
         <div className="flex-1" />
@@ -54,7 +55,7 @@ export function Hero() {
             className="label flex flex-wrap items-center gap-x-3 gap-y-1 text-paper/60"
             data-reveal
           >
-            <span className="text-signal">{site.city}</span>
+            <span className="text-ember">{site.city}</span>
             <span aria-hidden="true" className="h-px w-6 bg-white/25" />
             <span>{site.region}</span>
             <span aria-hidden="true" className="h-px w-6 bg-white/25" />
@@ -106,7 +107,7 @@ export function Hero() {
         className="pointer-events-none absolute right-8 bottom-40 z-10 hidden flex-col items-center gap-4 lg:flex xl:right-12"
         aria-hidden="true"
       >
-        <span className="label [writing-mode:vertical-rl] text-paper/40">Листать</span>
+        <span className="label [writing-mode:vertical-rl] text-paper/55">Листать</span>
         <span className="block h-20 w-px bg-gradient-to-b from-white/40 to-transparent" />
       </div>
 
@@ -119,7 +120,7 @@ export function Hero() {
                 i % 2 === 0 ? "border-r" : ""
               } ${i < 2 ? "border-b lg:border-b-0" : ""} ${i === 2 ? "lg:border-r" : ""}`}
             >
-              <dt className="label text-paper/40">{item.label}</dt>
+              <dt className="label text-paper/55">{item.label}</dt>
               <dd className="mt-2 truncate text-[0.9375rem] text-paper/90">
                 {item.href ? (
                   <a

@@ -15,12 +15,12 @@ export function About() {
   return (
     <section
       id="object"
-      className="grid-lines relative isolate bg-paper text-ink"
-      style={{ "--grid-color": "rgba(11,11,12,0.055)" } as React.CSSProperties}
+      className="grid-lines relative isolate bg-shale text-paper"
+      style={{ "--grid-color": "rgba(231,227,219,0.045)" } as React.CSSProperties}
     >
       <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
         <div data-reveal>
-          <Eyebrow index="01" tone="light">
+          <Eyebrow index="01">
             Объект
           </Eyebrow>
         </div>
@@ -29,17 +29,17 @@ export function About() {
           {/* Statement */}
           <div className="lg:col-span-7">
             <h2
-              className="display text-[clamp(1.9rem,4.6vw,3.75rem)] text-ink"
+              className="display text-[clamp(1.9rem,4.6vw,3.75rem)] text-paper"
               data-reveal
               style={{ "--reveal-delay": "60ms" } as React.CSSProperties}
             >
               Мы не показываем страшилки.
-              <span className="text-ink/45"> Мы ставим вас внутрь них.</span>
+              <span className="text-paper/55"> Мы ставим вас внутрь них.</span>
             </h2>
 
             <div className="mt-10 grid gap-8 lg:mt-12 lg:grid-cols-2 lg:gap-10">
               <p
-                className="text-[1.0625rem] leading-relaxed text-graphite"
+                className="text-[1.0625rem] leading-relaxed text-paper/65"
                 data-reveal
                 style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
               >
@@ -49,7 +49,7 @@ export function About() {
                 администраторов.
               </p>
               <p
-                className="text-[1.0625rem] leading-relaxed text-graphite"
+                className="text-[1.0625rem] leading-relaxed text-paper/65"
                 data-reveal
                 style={{ "--reveal-delay": "180ms" } as React.CSSProperties}
               >
@@ -60,19 +60,19 @@ export function About() {
             </div>
 
             <dl
-              className="mt-12 grid grid-cols-1 border-t border-ink/15 sm:grid-cols-2"
+              className="mt-12 grid grid-cols-1 border-t border-white/12 sm:grid-cols-2"
               data-reveal
               style={{ "--reveal-delay": "220ms" } as React.CSSProperties}
             >
               {facts.map((f, i) => (
                 <div
                   key={f.label}
-                  className={`flex flex-col gap-1.5 border-b border-ink/15 py-4 sm:py-5 ${
+                  className={`flex flex-col gap-1.5 border-b border-white/12 py-4 sm:py-5 ${
                     i % 2 === 0 ? "sm:border-r sm:pr-6" : "sm:pl-6"
                   }`}
                 >
-                  <dt className="label text-ink/45">{f.label}</dt>
-                  <dd className="text-[0.9375rem] leading-snug text-ink">{f.value}</dd>
+                  <dt className="label text-paper/55">{f.label}</dt>
+                  <dd className="text-[0.9375rem] leading-snug text-paper">{f.value}</dd>
                 </div>
               ))}
             </dl>
@@ -93,8 +93,8 @@ export function About() {
                   />
                 </div>
               </div>
-              <figcaption className="label mt-4 flex items-center gap-3 text-ink/40">
-                <span className="h-px w-8 bg-ink/25" aria-hidden="true" />
+              <figcaption className="label mt-4 flex items-center gap-3 text-paper/55">
+                <span className="h-px w-8 bg-paper/25" aria-hidden="true" />
                 Локация объекта · фото опубликовано на 2ГИС
               </figcaption>
             </figure>

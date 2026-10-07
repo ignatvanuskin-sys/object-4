@@ -6,9 +6,9 @@ import { site } from "@/lib/site";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const field =
-  "w-full border-b border-ink/25 bg-transparent py-4 text-[1rem] text-ink placeholder:text-ink/35 transition-colors duration-300 hover:border-ink/50 focus:border-signal focus:outline-none";
+  "w-full border-b border-white/20 bg-transparent py-4 text-[1rem] text-paper placeholder:text-paper/50 transition-colors duration-300 hover:border-white/40 focus:border-signal focus:outline-none";
 
-const labelCls = "label block text-ink/45";
+const labelCls = "label block text-paper/55";
 
 /**
  * Deliberately three fields. The payload is normalised, validated client-side and
@@ -81,17 +81,17 @@ export function BookingForm() {
 
   if (status === "sent") {
     return (
-      <div className="border border-ink/20 p-8">
-        <p className="label text-signal">Заявка отправлена</p>
-        <p className="display mt-4 text-[1.5rem] text-ink">Заявка у администратора.</p>
-        <p className="mt-4 text-[0.9375rem] leading-relaxed text-graphite">
+      <div className="border border-white/14 p-8">
+        <p className="label text-ember">Заявка отправлена</p>
+        <p className="display mt-4 text-[1.5rem] text-paper">Заявка у администратора.</p>
+        <p className="mt-4 text-[0.9375rem] leading-relaxed text-paper/65">
           Он свяжется по указанному номеру, подтвердит время и назовёт итоговую сумму. Если нужно
           быстрее — позвоните или напишите в WhatsApp.
         </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <a
             href={site.phoneHref}
-            className="label flex min-h-[50px] flex-1 items-center justify-center bg-ink px-6 text-paper transition-colors duration-300 hover:bg-signal"
+            className="label flex min-h-[50px] flex-1 items-center justify-center bg-paper px-6 text-paper transition-colors duration-300 hover:bg-signal"
           >
             {site.phoneLabel}
           </a>
@@ -99,7 +99,7 @@ export function BookingForm() {
             href={site.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="label flex min-h-[50px] flex-1 items-center justify-center border border-ink/25 px-6 text-ink transition-colors duration-300 hover:border-ink"
+            className="label flex min-h-[50px] flex-1 items-center justify-center border border-white/20 px-6 text-paper transition-colors duration-300 hover:border-paper"
           >
             WhatsApp
           </a>
@@ -107,7 +107,7 @@ export function BookingForm() {
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="label wipe mt-6 text-ink/50"
+          className="label wipe mt-6 text-paper/55"
         >
           Отправить ещё одну заявку
         </button>
@@ -116,8 +116,8 @@ export function BookingForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="border border-ink/20 p-6 sm:p-8">
-      <p className="label text-ink/45">Заявка на квест</p>
+    <form onSubmit={onSubmit} noValidate className="border border-white/14 p-6 sm:p-8">
+      <p className="label text-paper/55">Заявка на квест</p>
 
       <div className="mt-6 grid gap-6">
         <div>
@@ -174,7 +174,7 @@ export function BookingForm() {
       </div>
 
       {error ? (
-        <p id="bf-error" role="alert" className="mt-5 text-[0.875rem] leading-relaxed text-signal">
+        <p id="bf-error" role="alert" className="mt-5 text-[0.875rem] leading-relaxed text-ember">
           {error}
         </p>
       ) : null}
@@ -187,7 +187,7 @@ export function BookingForm() {
         {status === "sending" ? "Отправляем…" : "Получить консультацию"}
       </button>
 
-      <p className="mt-4 text-[0.75rem] leading-relaxed text-ink/45">
+      <p className="mt-4 text-[0.75rem] leading-relaxed text-paper/55">
         Отправляя форму, вы соглашаетесь на обработку указанных данных для связи по заявке.
         Регистрация и личный кабинет не нужны.
       </p>

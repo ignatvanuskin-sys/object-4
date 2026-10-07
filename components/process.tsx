@@ -67,7 +67,7 @@ export function Process() {
               </span>
             ))}
           </div>
-          <p className="label mt-3 text-paper/35">
+          <p className="label mt-3 text-paper/55">
             Этап {String(active + 1).padStart(2, "0")} / {String(processSteps.length).padStart(2, "0")}
             <span className="sr-only"> — прогресс {Math.round(progress)}%</span>
           </p>
@@ -88,7 +88,7 @@ export function Process() {
               >
                 <span
                   className={`num pt-1 text-[0.875rem] transition-colors duration-500 ${
-                    isActive ? "text-signal" : "text-paper/40"
+                    isActive ? "text-ember" : "text-paper/55"
                   }`}
                 >
                   {step.index}

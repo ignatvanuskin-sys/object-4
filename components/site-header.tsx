@@ -12,7 +12,7 @@ function Wordmark({ compact = false }: { compact?: boolean }) {
       >
         {site.mark}
       </span>
-      <span className="num text-signal text-[0.9rem] leading-none">{site.markIndex}</span>
+      <span className="num text-ember text-[0.9rem] leading-none">{site.markIndex}</span>
     </span>
   );
 }
@@ -128,7 +128,7 @@ export function SiteHeader() {
                     className="flex items-baseline gap-4 py-4"
                     style={{ transitionDelay: `${i * 30}ms` }}
                   >
-                    <span className="label num text-signal w-8 shrink-0 pt-1">
+                    <span className="label num text-ember w-8 shrink-0 pt-1">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="display text-[1.75rem] text-paper sm:text-[2.25rem]">
@@ -149,7 +149,7 @@ export function SiteHeader() {
               >
                 {site.phoneLabel}
               </a>
-              <p className="label text-paper/45">
+              <p className="label text-paper/60">
                 {site.city} · {site.hoursShort}
               </p>
             </div>

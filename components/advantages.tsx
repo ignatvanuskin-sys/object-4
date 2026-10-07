@@ -33,7 +33,7 @@ export function Advantages() {
               <dd className="num text-[clamp(2.25rem,5.4vw,3.75rem)] leading-none text-paper">
                 {s.value}
               </dd>
-              <dt className="label mt-3 text-paper/40">{s.label}</dt>
+              <dt className="label mt-3 text-paper/55">{s.label}</dt>
             </div>
           ))}
         </dl>
@@ -66,7 +66,7 @@ export function Advantages() {
                 data-reveal
                 style={{ "--reveal-delay": `${i * 40}ms` } as React.CSSProperties}
               >
-                <span className="num pt-1.5 text-[0.875rem] text-signal">{a.index}</span>
+                <span className="num pt-1.5 text-[0.875rem] text-ember">{a.index}</span>
                 <div>
                   <h3 className="display text-[clamp(1.25rem,2.6vw,1.75rem)] text-paper">
                     {a.title}
@@ -75,7 +75,7 @@ export function Advantages() {
                     {a.text}
                   </p>
                   {a.source ? (
-                    <p className="label mt-3 text-paper/30">Источник: {a.source}</p>
+                    <p className="label mt-3 text-paper/50">Источник: {a.source}</p>
                   ) : null}
                 </div>
               </li>

@@ -19,6 +19,7 @@ export function FinalCta() {
         aria-hidden="true"
       />
       <div className="grain absolute inset-0" aria-hidden="true" />
+      <div className="vignette absolute inset-0" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 py-24 sm:px-8 lg:px-12 lg:py-36">
         <div className="max-w-[min(100%,54rem)]">
@@ -65,7 +66,7 @@ export function FinalCta() {
             </a>
           </div>
 
-          <p className="label mt-8 text-paper/40">
+          <p className="label mt-8 text-paper/55">
             {site.addressFull}
           </p>
         </div>

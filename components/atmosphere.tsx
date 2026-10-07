@@ -14,15 +14,16 @@ type Tile = {
 };
 
 /**
- * Frames published on the venue's own 2GIS card. Photos with clearly
- * identifiable guests are deliberately not republished here.
+ * Frames published on the venue's own 2GIS card. One further candidate was
+ * dropped outright: roughly a third of every possible crop of it is dead
+ * black, which read as a hole in the grid rather than as a dark room.
  */
 const rowOne: Tile[] = [
   {
-    id: "corridor",
+    id: "stairs",
     kind: "wide",
     aspect: "aspect-16/10",
-    caption: "Тёмный пролёт и ограждение внутри объекта",
+    caption: "Стена с кадрами вдоль лестницы",
     sizes: "(max-width: 1023px) 100vw, 66vw",
   },
   {
@@ -87,39 +88,39 @@ function Tile({ tile, delay = 0 }: { tile: Tile; delay?: number }) {
           triggerClassName="block h-full w-full cursor-zoom-in"
         />
       </div>
-      <p className="label mt-3 hidden shrink-0 text-ink/40 lg:block">{tile.caption}</p>
+      <p className="label mt-3 hidden shrink-0 text-paper/55 lg:block">{tile.caption}</p>
     </div>
   );
 }
 
 export function Atmosphere() {
   return (
-    <section id="atmosphere" className="bg-paper text-ink">
+    <section id="atmosphere" className="bg-shale text-paper">
       <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
         <div data-reveal>
-          <Eyebrow index="03" tone="light">
+          <Eyebrow index="03">
             Атмосфера
           </Eyebrow>
         </div>
 
         <div className="mt-12 flex flex-col gap-6 lg:mt-16 lg:flex-row lg:items-end lg:justify-between">
           <h2
-            className="display max-w-[26ch] text-[clamp(1.9rem,4.4vw,3.5rem)] text-ink"
+            className="display max-w-[26ch] text-[clamp(1.9rem,4.4vw,3.5rem)] text-paper"
             data-reveal
           >
             Фотографии сделаны внутри объекта — не в студии.
           </h2>
           <p
-            className="measure text-[0.9375rem] leading-relaxed text-graphite lg:max-w-[36ch]"
+            className="measure text-[0.9375rem] leading-relaxed text-paper/65 lg:max-w-[36ch]"
             data-reveal
             style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
           >
-            Это кадры из фотоальбома компании на 2ГИС. Кадры с узнаваемыми лицами гостей мы сюда не
-            переносим — смотреть остальные можно по ссылке ниже.
+            Все кадры — из фотоальбома компании на 2ГИС: без стоковых фотографий и рендеров. Здесь
+            показана сама локация; остальные снимки — по ссылке ниже.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-4 sm:gap-6 lg:mt-16 lg:h-[clamp(380px,40vw,560px)] lg:grid-cols-12">
+        <div className="mt-12 grid gap-4 sm:gap-6 lg:mt-16 lg:h-[clamp(400px,43vw,620px)] lg:grid-cols-12">
           <div className="lg:col-span-8" data-reveal-clip>
             <Tile tile={rowOne[0]} />
           </div>
@@ -128,7 +129,7 @@ export function Atmosphere() {
           </div>
         </div>
 
-        <div className="mt-4 grid gap-4 sm:gap-6 lg:mt-6 lg:h-[clamp(320px,34vw,460px)] lg:grid-cols-12">
+        <div className="mt-4 grid gap-4 sm:gap-6 lg:mt-6 lg:h-[clamp(340px,37vw,520px)] lg:grid-cols-12">
           <div className="lg:col-span-4" data-reveal-clip>
             <Tile tile={rowTwo[0]} />
           </div>
@@ -137,41 +138,13 @@ export function Atmosphere() {
           </div>
         </div>
 
-        <div className="mt-4 sm:mt-6" data-reveal-clip>
-          <div className="clip-target relative aspect-16/10 lg:aspect-auto lg:h-[clamp(260px,26vw,380px)]">
-            <Lightbox
-              id="stairs"
-              kind="wide"
-              title="Лестница и настенный светильник"
-              caption="Фотография опубликована на карточке компании в 2ГИС."
-              trigger={
-                <span className="push group relative block h-full w-full overflow-hidden bg-ink-soft">
-                  <Photo
-                    id="stairs"
-                    kind="wide"
-                    alt="Лестница и настенный светильник внутри локации «Объект №4» в Рудном"
-                    sizes="100vw"
-                    className="h-full w-full object-cover"
-                    position="50% 42%"
-                  />
-                  <span
-                    className="absolute inset-0 bg-ink/25 transition-opacity duration-500 group-hover:opacity-0"
-                    aria-hidden="true"
-                  />
-                </span>
-              }
-              triggerClassName="block h-full w-full cursor-zoom-in"
-            />
-          </div>
-        </div>
-
         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="label text-ink/45">{site.galleryPhotos} фотографий · фотоальбом 2ГИС</p>
+          <p className="label text-paper/55">{site.galleryPhotos} фотографий · фотоальбом 2ГИС</p>
           <a
             href={site.twoGisGallery}
             target="_blank"
             rel="noopener noreferrer"
-            className="label wipe self-start text-ink sm:self-auto"
+            className="label wipe self-start text-paper sm:self-auto"
           >
             Смотреть весь альбом на 2ГИС →
           </a>

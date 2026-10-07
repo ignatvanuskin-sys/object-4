@@ -2,23 +2,31 @@
 
 /* ==========================================================================
    OBJECT RDN — design tokens
-   Concept: "техническое дело объекта" — engineering-documentation language.
-   Paper + graphite + one signal colour. Hairlines, index numbers, sharp corners.
+   Direction: "техническое дело объекта", pushed fully into the dark.
+   Every surface is nocturnal; sections separate by value, never by brightness.
+   Display type is a high-contrast serif (Playfair Display + Inter for UI).
    ========================================================================== */
 
 @theme {
-  --color-ink: #0b0b0c;
-  --color-ink-soft: #141416;
-  --color-ink-line: #2a2a2e;
-  --color-paper: #efece6;
-  --color-paper-soft: #e4e0d8;
-  --color-paper-line: #cfcac0;
-  --color-graphite: #3b3c40;
-  --color-mute: #74757c;
-  --color-signal: #e13b22;
-  --color-signal-deep: #b72b14;
+  /* Surfaces — deepest to least deep. All of them are night. */
+  --color-ink: #050506;
+  --color-pit: #0b0b0d;
+  --color-ink-soft: #121114;
+  --color-shale: #16151a;
+  --color-shale-2: #1e1c22;
 
-  --font-display: var(--font-oswald), "Arial Narrow", "Helvetica Neue", system-ui, sans-serif;
+  /* Text — light on every surface. */
+  --color-paper: #e7e3db;
+  --color-ash: #9c968d;
+  --color-iron: #6b665f;
+
+  /* One signal colour, taken down to dried blood. */
+  --color-signal: #d53820;
+  --color-signal-deep: #8c1b0b;
+  /* Same hue, lifted for small type: #d53820 only reaches ~3.5:1 on near-black. */
+  --color-ember: #ff6a4d;
+
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --ease-quint: cubic-bezier(0.16, 1, 0.3, 1);
@@ -36,6 +44,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  color-scheme: dark;
 }
 
 body {
@@ -63,22 +72,24 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   Typography helpers
+   Typography
+   The display face is a Didone serif: caps need a touch of tracking, and a
+   looser leading than a grotesque, or it reads as a wall.
    -------------------------------------------------------------------------- */
 
 .display {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  line-height: 0.92;
-  letter-spacing: -0.005em;
+  line-height: 0.94;
+  letter-spacing: 0.005em;
   text-wrap: balance;
 }
 
 .label {
   font-size: 0.6875rem;
   line-height: 1.2;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.17em;
   text-transform: uppercase;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
@@ -87,7 +98,7 @@ body {
 .num {
   font-family: var(--font-display);
   font-variant-numeric: tabular-nums;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .measure {
@@ -95,7 +106,8 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   Texture: fine film grain, keeps large flat areas from looking digital.
+   Texture — grain keeps the large dark planes from looking like flat digital
+   fill, a slow vignette pushes the edges of the page into the dark.
    -------------------------------------------------------------------------- */
 
 .grain::after {
@@ -103,22 +115,31 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.32;
+  opacity: 0.4;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
   background-size: 140px 140px;
 }
 
+.vignette {
+  background: radial-gradient(
+    120% 80% at 50% 45%,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 62%,
+    rgba(0, 0, 0, 0.72) 100%
+  );
+}
+
 /* Technical hairline grid, used behind selected sections. */
 .grid-lines {
   background-image:
-    linear-gradient(to right, var(--grid-color, rgba(255, 255, 255, 0.055)) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-color, rgba(255, 255, 255, 0.055)) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-color, rgba(231, 227, 219, 0.05)) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color, rgba(231, 227, 219, 0.05)) 1px, transparent 1px);
   background-size: 88px 88px;
 }
 
 /* --------------------------------------------------------------------------
-   Scroll reveal — driven by IntersectionObserver in components/reveal.tsx
+   Scroll reveal — driven by IntersectionObserver in components/reveal-manager.
    -------------------------------------------------------------------------- */
 
 [data-reveal] {
@@ -157,6 +178,7 @@ body {
   }
   .push:hover img {
     transform: scale(1.045);
+    filter: brightness(1.08);
   }
 }
 
@@ -171,6 +193,11 @@ body {
 .wipe:hover,
 .wipe:focus-visible {
   background-size: 100% 1px;
+}
+
+/* Quiet the photographic surfaces: they should sit behind the type, not compete. */
+.photo-dim img {
+  filter: brightness(0.92) contrast(1.06);
 }
 
 /* --------------------------------------------------------------------------
