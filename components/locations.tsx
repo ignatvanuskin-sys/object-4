@@ -118,11 +118,10 @@ export function Locations() {
       // The hash carries state, not an element id, so the browser has nothing
       // to scroll to on its own — a shared link would otherwise drop the
       // visitor at the top of the page with the section far below.
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      sectionRef.current?.scrollIntoView({
-        behavior: reduce ? "auto" : "smooth",
-        block: "start",
-      });
+      // `instant`, not `smooth`: this matches what a real fragment link does
+      // (jump, not glide), and `auto` would inherit scroll-behavior: smooth
+      // from the stylesheet.
+      sectionRef.current?.scrollIntoView({ behavior: "instant", block: "start" });
     };
     sync();
     window.addEventListener("hashchange", sync);
